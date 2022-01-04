@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
   root "hesti#home"
 
-  get "new_account" => "hesti#new_account", :as => "new_account"
+  get "signup" => "hesti#new_account", :as => "new_account"
   post "create_account" => "hesti#create_account", :as => "create_account"
   get "login"  => "hesti#login", :as => "login"
   post "login_auth"  => "hesti#login_auth", :as => "login_auth"
