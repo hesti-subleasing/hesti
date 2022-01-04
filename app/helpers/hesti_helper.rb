@@ -1,0 +1,2 @@
+module HestiHelper
+end
