@@ -8,12 +8,12 @@ class HestiController < ApplicationController
   def create_account
   end
 
-  def log_in
+  def login
   end
 
-  def log_in_auth
+  def login_auth
   end
 
-  def log_out
+  def logout
   end
 end
