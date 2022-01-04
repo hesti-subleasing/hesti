@@ -15,10 +15,6 @@ ActiveRecord::Schema.define(version: 2022_01_04_150559) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  # Custom types defined in this database.
-  # Note that some types may not work with other database engines. Be careful if changing database.
-  create_enum "amenities", ["washer_dryer", "dishwasher", "furnished", "pool", "allow_pets", "bus_route", "parking", "study_rooms", "ac", "heating", "gym", "trash_chute"]
-
   create_table "users", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
