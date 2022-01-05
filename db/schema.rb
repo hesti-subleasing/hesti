@@ -15,17 +15,6 @@ ActiveRecord::Schema.define(version: 2022_01_05_105233) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "users", force: :cascade do |t|
-    t.string "first_name"
-    t.string "last_name"
-    t.string "password"
-    t.string "email"
-    t.boolean "is_admin", default: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.string "username"
-  end
-
   create_table "listings", force: :cascade do |t|
     t.string "address_line_1"
     t.string "address_line_2"
@@ -49,6 +38,17 @@ ActiveRecord::Schema.define(version: 2022_01_05_105233) do
     t.float "rent"
     t.string "title"
     t.index ["user_id"], name: "index_listings_on_user_id"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.string "password"
+    t.string "email"
+    t.boolean "is_admin", default: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "username"
   end
 
   add_foreign_key "listings", "users"
