@@ -1,9 +1,6 @@
 class UsersController < ApplicationController
   helper_method :errors_for
 
-  def home
-  end
-
   def new
     @user = User.new
   end

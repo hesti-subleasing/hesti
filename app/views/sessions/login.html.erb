@@ -1,10 +1,17 @@
 <h1>Sessions#login</h1>
 <p>Find me in app/views/hesti/login.html.erb</p>
 
-<%= form_with url: "/login" do |form| %>
-  <%= form.label :email, "Email:" %>
-  <%= form.email_field :email, :required => true %>
-  <%= form.label :password, "Password:" %>
-  <%= form.password_field :password, :required => true %>
-  <%= form.submit "Login" %>
-<% end %>
+
+
+
+<body class="login">
+  <div class="form">
+    <%= form_with url: "/login", class: "login-form" do |form| %>
+      <i class="fas fa-user-circle"></i>
+      <%= form.email_field :email, class:"user-input", placeholder: "Email", :required => true %>
+      <%= form.password_field :password, class:"user-input", placeholder: "Password", :required => true %>
+      <%= form.submit "Login", class: "btn options-02" %>
+      <%= link_to "Sign Up", "/signup" %>
+    <% end %>
+  </div>
+</body>
