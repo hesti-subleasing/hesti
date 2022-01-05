@@ -1,7 +1,7 @@
-<h1>Hesti#log_in</h1>
-<p>Find me in app/views/hesti/log_in.html.erb</p>
+<h1>Sessions#login</h1>
+<p>Find me in app/views/hesti/login.html.erb</p>
 
-<%= form_with url: "/login_auth" do |form| %>
+<%= form_with url: "/login" do |form| %>
   <%= form.label :email, "Email:" %>
   <%= form.email_field :email, :required => true %>
   <%= form.label :password, "Password:" %>
