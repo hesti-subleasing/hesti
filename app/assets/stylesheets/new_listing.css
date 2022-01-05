@@ -1,0 +1,65 @@
+.create_listing_page {
+    display: flexbox;
+}
+
+.create_listing_title {
+    color: white;
+    text-align: center;
+    font-size: 100px;
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    z-index:100;
+}
+
+.wrap_create_list {
+    height: 110vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.listing_inputs {
+    z-index: 1;
+    /* width: 320px; */
+    width:100%;
+    text-align: center;
+}
+
+.listing_inputs .user-input {
+    width: 700px;
+    height: 40px;
+    margin-bottom: 15px;
+    outline: none;
+    border: none;
+    background: rgba(255, 255, 255, 0.2);
+    color: #fff;
+    font-size: 18px;
+    text-align: center;
+    border-radius: 5px;
+}
+
+.listing_inputs .col {
+    display:flex;
+    justify-content:space-between;
+    flex-direction:row;
+    flex-wrap:wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.listing_inputs .col {
+    column-count: 2;
+    column-gap: 40px;
+} 
+
+.listing_inputs:hover p, input:hover::placeholder {
+    color:  white;
+}
+
+p {
+    color: white;
+}
+
+
