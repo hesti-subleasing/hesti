@@ -11,7 +11,7 @@ class ListingsController < ApplicationController
     @listing = Listing.new(listing_params)
 
     if @listing.save
-      redirect_to :show, id: @listing.id
+      redirect_to listing_path(@listing)
     else
       puts @listing.errors.full_messages
       render :new
@@ -19,6 +19,7 @@ class ListingsController < ApplicationController
   end
 
   def show
+    @listing = Listing.find(params[:id])
   end
 
   def edit

@@ -27,8 +27,12 @@
     <h2>Find your way home</h2>
     <div class="wrap">
         <div class="buttons">
-            <%= button_to "Sign up", new_path, method: :get, class: "button" %>
-            <%= button_to "Log in", login_path, method: :get, class: "button" %>
+            <% if session[:user_id] %>
+              <%= button_to "Log out", logout_path, method: :get, class: "button" %>
+            <% else %>
+              <%= button_to "Sign up", new_path, method: :get, class: "button" %>
+              <%= button_to "Log in", login_path, method: :get, class: "button" %>
+            <% end %>
         </div>
     </div>
 </body>
