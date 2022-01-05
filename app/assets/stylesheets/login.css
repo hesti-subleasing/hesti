@@ -1,4 +1,12 @@
-
+.Login_txt{
+    color: white;
+    text-align: center;
+    font-size: 100px;
+    position:fixed;
+    top:0;
+    width:100%;
+    z-index:100;    
+}
   
 .login {
     height: 100vh;
