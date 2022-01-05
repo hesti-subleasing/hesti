@@ -1,77 +1,67 @@
-<head>
-   <title>Create a Listing</title>
-</head>
-<body class="create_listing_page">
-   <div class="listing_inputs">
-      <%= form_with model: @listing, url: "/listings", method: :post do |listing_form| %>
-         <%= listing_form.label :title, "Title" %>
-         <%= listing_form.text_field :title, :required => true %>
+<div class= "create_listing_page">
+   <head>
+      <h2 class= "create_listing_title">Create a Listing</h2>
+   </head>
+   <body class="wrap_create_list">
+      <div class="listing_inputs">
+         <%= form_with model: @listing, url: "/listings", method: :post do |listing_form| %>
+            <%= listing_form.text_field :title, class:"user-input", placeholder: "Title", :required => true %>
+            <br>
+            <div class = "col">
+               <%= listing_form.text_field :address_line_1, class:"user-input", placeholder: "Address Line 1", :required => true %>
+               <%= listing_form.text_field :address_line_2, class:"user-input", placeholder: "Address Line 2" %>
+               <%= listing_form.text_field :city, class:"user-input", placeholder: "City", :required => true %>
+               <%= listing_form.text_field :state, :maxlength => 2, class:"user-input", placeholder: "State", :required => true %>
+               <%= listing_form.text_field :zip_code, :maxlength => 5, class:"user-input", placeholder: "Zip Code", :required => true %>
+               <%= listing_form.text_field :apt_complex, class:"user-input", placeholder: "Apartment Complex Name"%>
+            </div>
+            <%= listing_form.number_field :rent, step: 0.01, class:"user-input", placeholder: "Rent", :required => true %>
+               <span> /month </span>
+            <br>
+            <p>lease start date - lease end date</p>
+            <%# maybe make this a dropdown/select %>
+            <%= listing_form.date_field :lease_start, class:"user-input", :required => true %>
 
-         <%= listing_form.label :address_line_1, "Address Line 1" %>
-         <%= listing_form.text_field :address_line_1, :required => true %>
+            <%= listing_form.date_field :lease_end, class:"user-input", :required => true %>
+            <%#  %>
 
-         <%= listing_form.label :address_line_2, "Address Line 2" %>
-         <%= listing_form.text_field :address_line_2 %>
+            <%# <% listing_form.label :private_bedroom, "Private Bedroom?" %>
+            <%# <% listing_form.check_box :private_bedroom %>
 
-         <%= listing_form.label :city, "City" %>
-         <%= listing_form.text_field :city, :required => true %>
+            <%= listing_form.label :private_bedroom, "Bedroom" %><br />
+            <%= listing_form.radio_button :private_bedroom, true %>
+            <%= listing_form.label :private_bedroom, "Private", :value => "true"  %>
+            <%= listing_form.radio_button :private_bedroom, false %>
+            <%= listing_form.label :private_bedroom, "Shared", :value => "false" %>
 
-         <%= listing_form.label :state, "State (ex: TX)" %>
-         <%= listing_form.text_field :state, :maxlength => 2, :required => true %>
+            <%# <% listing_form.label :private_bathroom, "Private Bathroom?" %>
+            <%# <% listing_form.check_box :private_bathrom %>
 
-         <%= listing_form.label :zip_code, "Zip Code" %>
-         <%= listing_form.text_field :zip_code, :maxlength => 5, :required => true %>
-
-         <%= listing_form.label :apt_complex, "Apartment Complex Name" %>
-         <%= listing_form.text_field :apt_complex %>
-
-         <%= listing_form.label :rent, "Rent" %>
-         <%= listing_form.number_field :rent, step: 0.01, :required => true %>
-            <span> /month </span>
-
-         <%# maybe make this a dropdown/select %>
-         <%= listing_form.label :lease_start, "Lease Start" %>
-         <%= listing_form.date_field :lease_start, :required => true %>
-         <%= listing_form.label :lease_end, "Lease End" %>
-         <%= listing_form.date_field :lease_end, :required => true %>
-         <%#  %>
-
-         <%# <% listing_form.label :private_bedroom, "Private Bedroom?" %>
-         <%# <% listing_form.check_box :private_bedroom %>
-
-         <%= listing_form.label :private_bedroom, "Bedroom" %><br />
-         <%= listing_form.radio_button :private_bedroom, true %>
-         <%= listing_form.label :private_bedroom, "Private", :value => "true"  %>
-         <%= listing_form.radio_button :private_bedroom, false %>
-         <%= listing_form.label :private_bedroom, "Shared", :value => "false" %>
-
-         <%# <% listing_form.label :private_bathroom, "Private Bathroom?" %>
-         <%# <% listing_form.check_box :private_bathrom %>
-
-         <%= listing_form.label :private_bathroom, "Bathroom" %><br />
-         <%= listing_form.radio_button :private_bathroom, true %>
-         <%= listing_form.label :private_bathroom, "Private", :value => "true"  %>
-         <%= listing_form.radio_button :private_bathroom, false %>
-         <%= listing_form.label :private_bathroom, "Shared", :value => "false" %>
+            <%= listing_form.label :private_bathroom, "Bathroom" %><br />
+            <%= listing_form.radio_button :private_bathroom, true %>
+            <%= listing_form.label :private_bathroom, "Private", :value => "true"  %>
+            <%= listing_form.radio_button :private_bathroom, false %>
+            <%= listing_form.label :private_bathroom, "Shared", :value => "false" %>
 
 
-         <%= listing_form.label :num_roommates, "Number of Roommates" %>
-         <%= listing_form.number_field :num_roommates, min: 0 %>
+            <%= listing_form.label :num_roommates, "Number of Roommates" %>
+            <%= listing_form.number_field :num_roommates, min: 0 %>
 
-         <%= listing_form.label :num_bedrooms, "Number of Bedrooms" %>
-         <%= listing_form.number_field :num_bedrooms, min: 0 %>
+            <%= listing_form.label :num_bedrooms, "Number of Bedrooms" %>
+            <%= listing_form.number_field :num_bedrooms, min: 0 %>
 
-         <%= listing_form.label :num_bathrooms, "Number of Bathrooms" %>
-         <%= listing_form.number_field :num_bathrooms, min: 0 %>
+            <%= listing_form.label :num_bathrooms, "Number of Bathrooms" %>
+            <%= listing_form.number_field :num_bathrooms, min: 0 %>
 
-         <%= listing_form.label :num_pets, "Number of Pets" %>
-         <%= listing_form.number_field :num_pets, min: 0 %>
-         
-         <%= listing_form.label :description, "Description" %>
-         <%= listing_form.text_area :description %>
+            <%= listing_form.label :num_pets, "Number of Pets" %>
+            <%= listing_form.number_field :num_pets, min: 0 %>
+            
+            <%= listing_form.label :description, "Description" %>
+            <%= listing_form.text_area :description %>
 
-         <%= listing_form.submit "Submit" %>
+            <%= listing_form.submit "Submit" %>
 
-      <% end %>
-   </div>
-</body>
+         <% end %>
+      </div>
+   </body>
+</div>
