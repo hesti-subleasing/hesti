@@ -1,0 +1,22 @@
+<tr>
+    <td><%= image_tag ("bedroom.jpg") %></td>
+    <td style="color: white">
+        <%= listing.title %>
+        <br>
+        <% if listing.apt_complex %>
+            <%= listing.apt_complex %>
+            <br>
+        <% end %>
+        
+        <% if listing.rent %>
+            $<%= number_with_precision(listing.rent, precision: 2,  strip_insignificant_zeros: true) %>/month
+            <br>
+        <% end %>
+
+        <% if listing.num_bedrooms && listing.num_bathrooms %>
+            <%= listing.num_bedrooms %> X <%= listing.num_bathrooms %>
+            <br>
+        <% end %>
+
+    </td>
+</tr>
