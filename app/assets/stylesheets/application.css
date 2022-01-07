@@ -26,6 +26,8 @@
     height: calc(3em + 15px);
     width:100vw;
     background-color: white;
+    position: absolute;
+    top:0;
   }
 
   .logo-image{
