@@ -5,3 +5,8 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
+amenities = ["In Unit Washer/Dryer", "Dishwasher", "Furnished", "Pool", "Pets Allowed", "On University Bus Route", "Parking", "Public Study Rooms", "AC", "Heating", "Gym", "Trash Chute"]
+  
+amenities.each do |amenity| 
+    Amenity.create(amenity_name: amenity)
+end
