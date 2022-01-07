@@ -26,6 +26,16 @@
     width:100vw;
     background-color: white;
   }
+
+  .logo-image{
+    height: 85px;
+    width: auto;
+    border-radius: 50%;
+    overflow: hidden;
+    padding: 3px;
+    /* margin-top: -6px; */
+
+}
   
   .navMenu {
     position: absolute;
