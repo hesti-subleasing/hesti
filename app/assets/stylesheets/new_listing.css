@@ -5,39 +5,58 @@
 .create_listing_title {
     color: white;
     text-align: center;
-    font-size: 100px;
-    position:absolute;
-    top:0;
-    left:0;
+    font-size: 70px;
     width:100%;
     z-index:100;
 }
 
 .wrap_create_list {
-    height: 110vh;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+textarea {
+    font-family: inherit;
+    font-size: inherit;
+}
+
+.button {
+    display: inline-block;
+}
+
 .listing_inputs {
     z-index: 1;
     /* width: 320px; */
-    width:100%;
+    width: 100%;
+    border: white;
     text-align: center;
+    border-style: solid;
+    padding-top: 50px;
+    padding-left: 50px;
+    width: 950px;
 }
 
 .listing_inputs .user-input {
-    width: 700px;
-    height: 40px;
-    margin-bottom: 15px;
+    width: 330px;
+    height: 33px;
+    margin-bottom: 30px;
     outline: none;
     border: none;
-    background: rgba(255, 255, 255, 0.2);
+    border-bottom: 2px solid white;
+    background: rgba(255, 255, 255, 0);
     color: #fff;
     font-size: 18px;
-    text-align: center;
-    border-radius: 5px;
+}
+
+.user-input:focus {
+    border-bottom-color: #d05a59;
 }
 
 .listing_inputs .col {
@@ -58,8 +77,42 @@
     color:  white;
 }
 
-p {
+p, span, label {
     color: white;
+    font-size: 18px;
+}
+
+.section-heading {
+    font-size: 27px;
+}
+
+.divider {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.date {
+    width: 160px!important;
+}
+
+.rent {
+    width: 70px!important;
+}
+
+.pets, .roommates {
+    width: 120px!important;
+}
+
+.left-x, .right-x {
+    width: 42px!important;
+}
+
+.left-x {
+    text-align: right;
+}
+
+.right-x {
+    text-align: left;
 }
 
 
