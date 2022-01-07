@@ -2,14 +2,6 @@
     display: flexbox;
 }
 
-.create_listing_title {
-    color: white;
-    text-align: center;
-    font-size: 70px;
-    width:100%;
-    z-index:100;
-}
-
 .wrap_create_list {
     display: flex;
     justify-content: center;
