@@ -1,2 +1,18 @@
 <h1>Users#edit</h1>
 <p>Find me in app/views/users/edit.html.erb</p>
+
+<h2>Edit Account Info</h2>
+
+<%= form_with model: @user, url: update_path, method: :put do |user_form| %>
+    <%= label :user, :first_name, "First Name" %>
+    <%= user_form.text_field :first_name, class:"user-input", placeholder: @user.first_name, value: "" %>
+    <%= label :user, :last_name, "Last Name" %>
+    <%= user_form.text_field :last_name, class:"user-input", placeholder: @user.last_name, value: "" %>
+    <%= label :user, :username, "Username" %>
+    <%= user_form.text_field :username, class:"user-input", placeholder: @user.username, value: "" %>
+    <%= label :user, :email, "Email" %>
+    <%= user_form.email_field :email, class:"user-input", placeholder: @user.email, value: "" %>
+    <%= label :user, :password, "Password" %>
+    <%= user_form.password_field :password, class:"user-input", placeholder: "Password" %>
+    <%= user_form.submit "Save" %>
+<% end %>

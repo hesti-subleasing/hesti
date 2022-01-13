@@ -13,6 +13,7 @@
     <div class="wrap">
         <div class="buttons">
             <% if session[:user_id] %>
+              <%= button_to "Profile", profile_path, method: :get, class: "button" %>
               <%= button_to "Log out", logout_path, method: :get, class: "button" %>
             <% else %>
               <%= button_to "Sign up", new_path, method: :get, class: "button" %>

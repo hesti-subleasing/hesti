@@ -66,7 +66,7 @@ ActiveRecord::Schema.define(version: 2022_01_07_102630) do
     t.string "username"
   end
 
-  add_foreign_key "amenity_mappings", "amenities"
-  add_foreign_key "amenity_mappings", "listings"
-  add_foreign_key "listings", "users"
+  add_foreign_key "amenity_mappings", "amenities", on_delete: :cascade
+  add_foreign_key "amenity_mappings", "listings", on_delete: :cascade
+  add_foreign_key "listings", "users", on_delete: :cascade
 end

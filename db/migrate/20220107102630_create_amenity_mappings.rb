@@ -6,7 +6,7 @@ class CreateAmenityMappings < ActiveRecord::Migration[7.0]
 
       t.timestamps
     end
-    add_foreign_key :amenity_mappings, :listings
-    add_foreign_key :amenity_mappings, :amenities
+    add_foreign_key :amenity_mappings, :listings, on_delete: :cascade
+    add_foreign_key :amenity_mappings, :amenities, on_delete: :cascade
   end
 end

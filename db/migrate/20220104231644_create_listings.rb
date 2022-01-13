@@ -21,6 +21,6 @@ class CreateListings < ActiveRecord::Migration[7.0]
 
       t.timestamps
     end
-    add_foreign_key :listings, :users
+    add_foreign_key :listings, :users, on_delete: :cascade
   end
 end
