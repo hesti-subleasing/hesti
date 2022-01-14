@@ -1,12 +1,21 @@
-Rails.application.routes.draw do
+Rails.application.routes.draw do  
+  # root "index" => "application#index", :as => "root"
+  root "application#index"
 
-  root "hesti#home"
+  get "signup" => "users#new", :as => "new"
+  post "create" => "users#create", :as => "create"
+  get "edit" => "users#edit", :as => "edit"
+  put "update" => "users#update", :as => "update"
+  get "profile" => "users#show", :as => "profile"
+  delete "destroy" => "users#destroy", :as => "deactivate"
 
-  get "new_account" => "hesti#new_account", :as => "new_account"
-  post "create_account" => "hesti#create_account", :as => "create_account"
-  get "login"  => "hesti#login", :as => "login"
-  post "login_auth"  => "hesti#login_auth", :as => "login_auth"
-  post "logout" => "hesti#logout", :as => "logout"
+
+  get "login"  => "sessions#login", :as => "login"
+  post "login"  => "sessions#create", :as => "login_post"
+  post "logout" => "sessions#destroy", :as => "logout_post"
+  get "logout" => "sessions#destroy", :as => "logout"
+
+  resources :listings
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

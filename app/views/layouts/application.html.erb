@@ -11,6 +11,19 @@
   </head>
 
   <body>
+    <div class="navBar">
+      <div class="logo-image">
+        <%= image_tag ("Logo_colored.png") %> 
+      </div>
+      <nav class="navMenu">
+        <a href="#">Home</a>
+        <a href="#">Search</a>
+        <a href="#">Listings</a>
+        <a href="#">About</a> 
+
+        <div class="dot"></div>
+      </nav>
+    </div>
     <%= yield %>
   </body>
 </html>

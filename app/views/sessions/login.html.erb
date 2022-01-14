@@ -1,0 +1,15 @@
+<h1 class= "login_txt", style="position: absolute;top: 0;">Login</h1>
+<body class="login">
+
+  <div class="form">
+    <%= form_with url: "/login", class: "login-form" do |form| %>
+      <i class="fas fa-user-circle"></i>
+      <%= form.email_field :email, class:"user-input", placeholder: "Email", :required => true %>
+      <%= form.password_field :password, class:"user-input", placeholder: "Password", :required => true %>
+      <%= form.submit "Login", class: "btn options-02" %>
+      <div class="options-02">
+        <p>Don't have an account? <%= link_to "Sign Up", "/signup", class: "sml_btn"%></p>
+      </div>
+    <% end %>
+  </div>
+</body>

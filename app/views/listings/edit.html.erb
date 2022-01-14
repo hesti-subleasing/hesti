@@ -1,0 +1,79 @@
+<h1>Listings#edit</h1>
+<p>Find me in app/views/listings/edit.html.erb</p>
+
+<div class="listing_inputs">
+    <%= form_with model: @listing, url: listing_path(@listing), method: :put do |listing_form| %>
+        <h3 class="section-heading">Title</h3>
+            <%= listing_form.text_field :title, class:"user-input", placeholder: "Title", :required => true %>
+        <br>
+        <h3 class="section-heading">Address</h3>
+        <div class = "col">
+            <%= listing_form.text_field :address_line_1, class:"user-input", placeholder: "Address Line 1", :required => true %>
+            <%= listing_form.text_field :address_line_2, class:"user-input", placeholder: "Address Line 2" %>
+            <%= listing_form.text_field :city, class:"user-input", placeholder: "City", :required => true %>
+            <%= listing_form.text_field :state, :maxlength => 2, class:"user-input", placeholder: "State", :required => true %>
+            <%= listing_form.text_field :zip_code, :maxlength => 5, class:"user-input", placeholder: "Zip Code", :required => true %>
+            <%= listing_form.text_field :apt_complex, class:"user-input", placeholder: "Apartment Complex Name"%>
+        </div>
+        <h3 class="section-heading">Rent</h3>
+        <span>$</span>
+        <%= listing_form.number_field :rent, step: :any, class:"user-input rent", :required => true %>
+            <span> /month </span>
+        <br>
+        <h3 class="section-heading">Lease Term</h3>
+        <%# <p>lease start date - lease end date</p> %>
+        <%# maybe make this a dropdown/select %>
+        <%= listing_form.date_field :lease_start, class:"user-input date", :required => true %>
+        <span class="divider">&mdash;</span>
+        <%= listing_form.date_field :lease_end, class:"user-input date", :required => true %>
+        <br>
+
+        <%# <% listing_form.label :private_bedroom, "Private Bedroom?" %>
+        <%# <% listing_form.check_box :private_bedroom %>
+
+        <h3 class="section-heading">Bedroom</h3>
+        <%= listing_form.radio_button :private_bedroom, true %>
+        <%= listing_form.label :private_bedroom, "Private", :value => "true"  %>
+        &nbsp;&nbsp;&nbsp;
+        <%= listing_form.radio_button :private_bedroom, false %>
+        <%= listing_form.label :private_bedroom, "Shared", :value => "false" %>
+        <br><br>
+
+        <%# <% listing_form.label :private_bathroom, "Private Bathroom?" %>
+        <%# <% listing_form.check_box :private_bathrom %>
+
+        <h3 class="section-heading">Bathroom</h3>
+        <%= listing_form.radio_button :private_bathroom, true %>
+        <%= listing_form.label :private_bathroom, "Private", :value => "true"  %>
+        &nbsp;&nbsp;&nbsp;
+        <%= listing_form.radio_button :private_bathroom, false %>
+        <%= listing_form.label :private_bathroom, "Shared", :value => "false" %>
+        <br><br>
+
+
+        <h3 class="section-heading">House/Apartment Information</h3>
+
+        <div class = "col">
+        <%= listing_form.number_field :num_roommates, class:"user-input roommates", placeholder: "# Roommates", min: 0 %>
+        <br>
+        <span>
+            <%= listing_form.number_field :num_bedrooms, class:"left-x user-input", placeholder: "# Bd", min: 0 %>
+            <span class="divider">X</span>
+
+            <%= listing_form.number_field :num_bathrooms, class:"right-x user-input", placeholder: "# Br", min: 0 %>
+        </span>
+        <br>
+
+        <%= listing_form.number_field :num_pets, class:"user-input pets", placeholder: "# Pets", min: 0 %>
+        <br>
+        </div>
+
+        <h3 class="section-heading">Description</h3>
+
+        <%= listing_form.text_area :description, class:"user-input", placeholder: "Description" %>
+        <br>
+
+        <%= listing_form.submit "Save", class: "button" %>
+
+    <% end %>
+</div>
