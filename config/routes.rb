@@ -2,12 +2,12 @@ Rails.application.routes.draw do
   # root "index" => "application#index", :as => "root"
   root "application#index"
 
-  get "signup" => "users#new", :as => "new"
-  post "create" => "users#create", :as => "create"
-  get "edit" => "users#edit", :as => "edit"
-  put "update" => "users#update", :as => "update"
-  get "show" => "users#show", :as => "show"
-  delete "destroy" => "users#destroy", :as => "destroy"
+  get "signup" => "users#new", :as => "signup"
+  post "create" => "users#create", :as => "create_user"
+  get "edit" => "users#edit", :as => "edit_user"
+  put "update" => "users#update", :as => "update_user"
+  get "show" => "users#show", :as => "show_user"
+  delete "destroy" => "users#destroy", :as => "destroy_user"
 
 
   get "login"  => "sessions#login", :as => "login"

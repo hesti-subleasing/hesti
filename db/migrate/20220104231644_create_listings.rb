@@ -1,4 +1,4 @@
-class CreateListings < ActiveRecord::Migration[7.0]
+class CreateListings < ActiveRecord::Migration[6.1]
   def change
     create_table :listings do |t|
       t.string :address_line_1

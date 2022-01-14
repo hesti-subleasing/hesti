@@ -12,7 +12,7 @@ class UsersController < ApplicationController
       session[:user_id] = @user.id
       redirect_to listings_path
     else
-      render :new
+      render :signup
     end
   end
 

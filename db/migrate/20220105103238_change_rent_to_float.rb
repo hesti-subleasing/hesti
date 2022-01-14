@@ -1,4 +1,4 @@
-class ChangeRentToFloat < ActiveRecord::Migration[7.0]
+class ChangeRentToFloat < ActiveRecord::Migration[6.1]
   def change
     remove_column :listings, :rent
     add_column :listings, :rent, :float
