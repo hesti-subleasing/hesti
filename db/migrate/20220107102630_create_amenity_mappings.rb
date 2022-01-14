@@ -1,4 +1,4 @@
-class CreateAmenityMappings < ActiveRecord::Migration[7.0]
+class CreateAmenityMappings < ActiveRecord::Migration[6.1]
   def change
     create_table :amenity_mappings do |t|
       t.references :listing, null: false

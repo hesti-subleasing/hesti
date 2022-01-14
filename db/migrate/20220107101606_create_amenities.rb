@@ -1,4 +1,4 @@
-class CreateAmenities < ActiveRecord::Migration[7.0]
+class CreateAmenities < ActiveRecord::Migration[6.1]
   def change
     create_table :amenities do |t|
       t.string :amenity_name
