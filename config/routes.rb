@@ -6,8 +6,8 @@ Rails.application.routes.draw do
   post "create" => "users#create", :as => "create"
   get "edit" => "users#edit", :as => "edit"
   put "update" => "users#update", :as => "update"
-  get "show" => "users#show", :as => "show"
-  delete "destroy" => "users#destroy", :as => "destroy"
+  get "profile" => "users#show", :as => "profile"
+  delete "destroy" => "users#destroy", :as => "deactivate"
 
 
   get "login"  => "sessions#login", :as => "login"

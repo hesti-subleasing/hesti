@@ -24,12 +24,35 @@ class ListingsController < ApplicationController
   end
 
   def edit
+    @listing = Listing.find(params[:id])
+    if @listing.user_id != session[:user_id]
+      redirect_to listings_path
+    end
   end
 
   def update
+    @listing = Listing.find(params[:id])
+    if @listing.user_id == session[:user_id]
+      # params["listing"].each do |key, val|
+      #   unless val.empty?
+      #     @listing.update_attribute(key, val)
+      #   end
+      # end
+      @listing.update!(listing_params)
+      redirect_to listing_path(@listing)
+    else
+      redirect_to listings_path
+    end
   end
 
   def destroy
+    @listing = Listing.find(params[:id])
+    if @listing.user_id == session[:user_id]
+      @listing.destroy
+      redirect_to profile_path
+    else
+      redirect_to listings_path
+    end
   end
 
   def listing_params
