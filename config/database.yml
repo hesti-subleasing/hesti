@@ -91,5 +91,17 @@ production:
   password: <%= ENV['RDS_PASSWORD'] %>
   host: <%= ENV['RDS_HOST'] %>
   port: 5432
+
+test: &test
+  <<: *default
+  database: <%= ENV['RDS_TEST_DATABASE'] %>
+  username: <%= ENV['RDS_TEST_USERNAME'] %>
+  password: <%= ENV['RDS_TEST_PASSWORD'] %>
+  host: <%= ENV['RDS_TEST_HOST'] %>
+  port: 5432
+
+cucumber:
+  <<: *test
+
 cucumber:
   <<: *test

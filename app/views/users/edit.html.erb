@@ -3,7 +3,7 @@
 
 <h2>Edit Account Info</h2>
 
-<%= form_with model: @user, url: update_path, method: :put do |user_form| %>
+<%= form_with model: @user, url: update_user_path, method: :put do |user_form| %>
     <%= label :user, :first_name, "First Name" %>
     <%= user_form.text_field :first_name, class:"user-input", placeholder: @user.first_name, value: "" %>
     <%= label :user, :last_name, "Last Name" %>

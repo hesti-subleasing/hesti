@@ -7,7 +7,7 @@
 <h3>Username: <%= @user.username%></h3>
 <h3>Email: <%= @user.email%></h3>
 
-<%= button_to "Edit Account", edit_path, method: :get, class: "button" %>
+<%= button_to "Edit Account", edit_user_path, method: :get, class: "button" %>
 <%= button_to "Deactivate my Account", deactivate_path, method: :delete, class: "button" %>
 
 <h3>My Listings</h3>
