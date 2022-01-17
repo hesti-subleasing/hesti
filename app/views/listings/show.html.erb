@@ -61,3 +61,15 @@
         <%= @listing.description %>
     </div>
 </div>
+
+<div class="container">
+    <div>
+        Amenities: 
+    </div>
+    <div>
+        <% for amenity in @amenities %>
+            <li><%= amenity %></li>
+            <br>
+        <% end %>
+    </div>
+</div>
