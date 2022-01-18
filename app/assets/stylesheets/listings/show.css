@@ -1,0 +1,23 @@
+h1, h3, div{
+    color: #c28e71;
+}
+
+li {
+    display: inline;
+    list-style: none
+}
+
+.container {
+    display: flex;
+    /* justify-content: flex-start; */
+    gap: 10px;
+}
+
+.tab {
+    text-indent: 30px;
+}
+
+img {
+    width: 50%;
+    height: 30%;
+}

@@ -16,13 +16,12 @@
  @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap");
 
  body{
-     background-color: black;
+     background-color: #ded2cc;
      margin: 0;
-
  }
  
 h1 {
-    color: white;
+    color: #c28e71;
     text-align: center;
     font-size: 70px;
     width:100%;
@@ -76,13 +75,13 @@ h1 {
   }
   
   .navMenu a:hover {
-    color: #d05a59;
+    color: #c28e71;
   }
   
   .navMenu .dot {
     width: 6px;
     height: 6px;
-    background: #d05a59;
+    background: #c28e71;
     border-radius: 50%;
     opacity: 0;
     -webkit-transform: translateX(30px);
