@@ -1,4 +1,4 @@
-class ChangeUserIsAdminDefault < ActiveRecord::Migration[7.0]
+class ChangeUserIsAdminDefault < ActiveRecord::Migration[6.1]
   def change
     change_column_default :users, :is_admin, false
   end

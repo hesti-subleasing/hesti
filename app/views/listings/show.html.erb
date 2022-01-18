@@ -1,7 +1,6 @@
 <%# <h1>Listings#show</h1>
 <p>Find me in app/views/listings/show.html.erb</p> %>
 
-<% stylesheet_link_tag "show" %>
 
 
 <h1><%= @listing.title %></h1>
@@ -59,5 +58,17 @@
     </div>
     <div>
         <%= @listing.description %>
+    </div>
+</div>
+
+<div class="container">
+    <div>
+        Amenities: 
+    </div>
+    <div>
+        <% for amenity in @amenities %>
+            <li><%= amenity %></li>
+            <br>
+        <% end %>
     </div>
 </div>

@@ -8,9 +8,8 @@
 <h3>Email: <%= @user.email%></h3>
 
 <%= button_to "Edit Account", edit_path, method: :get, class: "button" %>
-<%= button_to "Deactivate my Account", deactivate_path, method: :delete, class: "button" %>
+<%= button_to "Deactivate my Account", deactivate_path, method: :delete, class: "button", data: { confirm: "Are you sure?" } %>
+<%= button_to "Create Listing", new_listing_path, method: :get, class: "button" %>
 
 <h3>My Listings</h3>
-<table>
-    <%= render partial: "listing", collection: @listings %>
-</table>
+<%= render partial: "listing", collection: @listings %>
