@@ -5,14 +5,14 @@
 
 <%= form_with model: @user, url: update_user_path, method: :put do |user_form| %>
     <%= label :user, :first_name, "First Name" %>
-    <%= user_form.text_field :first_name, class:"user-input", placeholder: @user.first_name, value: "" %>
+    <%= user_form.text_field :first_name, class:"user-input", placeholder: "First Name", :required => true %>
     <%= label :user, :last_name, "Last Name" %>
-    <%= user_form.text_field :last_name, class:"user-input", placeholder: @user.last_name, value: "" %>
+    <%= user_form.text_field :last_name, class:"user-input", placeholder: "Last Name", :required => true %>
     <%= label :user, :username, "Username" %>
-    <%= user_form.text_field :username, class:"user-input", placeholder: @user.username, value: "" %>
+    <%= user_form.text_field :username, class:"user-input", placeholder: "Username", :required => true %>
     <%= label :user, :email, "Email" %>
-    <%= user_form.email_field :email, class:"user-input", placeholder: @user.email, value: "" %>
+    <%= user_form.email_field :email, class:"user-input", placeholder: "Email", :required => true %>
     <%= label :user, :password, "Password" %>
-    <%= user_form.password_field :password, class:"user-input", placeholder: "Password" %>
-    <%= user_form.submit "Save" %>
+    <%= user_form.password_field :password, class:"user-input", placeholder: "Password",:required => true %>
+    <%= user_form.submit "Sign Up", class: "btn" %>
 <% end %>
