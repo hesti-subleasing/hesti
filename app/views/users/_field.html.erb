@@ -1,0 +1,22 @@
+<% invalid = errors.include?(attribute) %>
+
+<div class="field">
+
+<% case type
+        when "text" %>
+    <%= form.text_field attribute, class:"user-input #{'is-invalid' if invalid}", placeholder: placeholder %>
+    <% when "email" %>
+    <%= form.email_field attribute, class:"user-input #{'is-invalid' if invalid}", placeholder: placeholder %>
+    <% when "password" %>
+    <%= form.password_field attribute, class:"user-input #{'is-invalid' if invalid}", placeholder: placeholder %>
+<% end %>
+
+<% if invalid %>
+  <div class="invalid-feedback d-block">
+    <% errors.full_messages_for(attribute).each do |error_message| %>
+      <%= error_message %>.
+    <% end %>
+  </div>
+<% end %>
+
+</div>

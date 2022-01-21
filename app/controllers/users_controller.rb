@@ -14,11 +14,16 @@ class UsersController < ApplicationController
     # create a new user
     @user = User.new(user_params)
 
-    if @user.save
+    if @user.save and (user_params[:password] == user_params[:password_confirmation])
       session[:user_id] = @user.id
       redirect_to listings_path
     else
-      render :signup
+      if user_params[:password] != user_params[:password_confirmation]
+        @user.errors.add(:password_confirmation, "does not match")
+        print "adding"
+      end
+
+      render :new, status: :unprocessable_entity
     end
   end
   
@@ -75,6 +80,6 @@ class UsersController < ApplicationController
   # helper functions
 
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :username, :email, :password)
+    params.require(:user).permit(:first_name, :last_name, :username, :email, :password, :password_confirmation)
   end
 end

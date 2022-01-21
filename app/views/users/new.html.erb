@@ -14,13 +14,22 @@
     <h1 style="position: absolute;top: -47px;">Sign Up</h1>
 
     <div class = "signup-form">
-      <%= form_with model: @user, url: "/create", class: "signup-form" do |user_form| %>
+      <%= form_with model: @user, local: true, url: "/create", class: "signup-form" do |user_form| %>
+
       <i class="fas fa-user-plus"></i>
-      <%= user_form.text_field :first_name, class:"user-input", placeholder: "First Name", :required => true %>
-      <%= user_form.text_field :last_name, class:"user-input", placeholder: "Last Name", :required => true %>
-      <%= user_form.text_field :username, class:"user-input", placeholder: "Username", :required => true %>
-      <%= user_form.email_field :email, class:"user-input", placeholder: "Email", :required => true %>
-      <%= user_form.password_field :password, class:"user-input", placeholder: "Password",:required => true %>
+
+      <%= render partial: "field", locals: {form: user_form, type: "text", attribute: :first_name, placeholder: "First Name", errors: @user.errors} %>
+
+      <%= render partial: "field", locals: {form: user_form, type: "text", attribute: :last_name, placeholder: "Last Name", errors: @user.errors} %>
+
+      <%= render partial: "field", locals: {form: user_form, type: "text", attribute: :username, placeholder: "Username", errors: @user.errors} %>
+      
+      <%= render partial: "field", locals: {form: user_form, type: "email", attribute: :email, placeholder: "Email", errors: @user.errors} %>
+      
+      <%= render partial: "field", locals: {form: user_form, type: "password", attribute: :password, placeholder: "Password", errors: @user.errors} %>
+
+      <%= render partial: "field", locals: {form: user_form, type: "password", attribute: :password_confirmation, placeholder: "Confirm Password", errors: @user.errors} %>
+
       <%= user_form.submit "Sign Up", class: "btn" %>
       <div class="options-02">
         <p>Already Registered? <%= link_to "Login", "/login"%></p>

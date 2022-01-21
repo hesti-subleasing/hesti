@@ -3,26 +3,33 @@ Feature: Create an account
     So that I can find a listing
     I want to create an account
 
+Background: accounts in database
+
+    Given the following accounts exist:
+    | first_name        | last_name | username     | email          | password |
+    | test              | ing       | user         | test@test.test | testing  |
+    | test              | ing       | user2        | test@tamu.edu  | testing  |
+
 Scenario: I create a new account
 	Given I am on the signup page
-	When I fill out the form with first=b, last=g, username=blue, email=blue@gmail.com, password=blue
+	When I fill out the form with first="b", last="g", username="blue", email="blue@gmail.com", password="blue"
     And I click "Sign Up"
-	Then I should see my profile page
+	Then I should be on the listings page
 
 Scenario: I attempt to create an account with a duplicate username
-    Given I am on signup
-    And there is an account with username "user"
-    When I create an account with username "user"
-    Then I should see "Username taken"
+    Given I am on the signup page
+    When I fill out the form with username="user"
+    And I click "Sign Up"
+    Then I should see "Username has already been taken"
 
 Scenario: I attempt to create an account with a duplicate email
-    Given I am on signup
-    And there is an account with email "test@tamu.edu"
-    When I create an account with email "test@tamu.edu"
-    Then I should see "An account with this email already exists"
+    Given I am on the signup page
+    When I fill out the form with email="test@tamu.edu"
+    And I click "Sign Up"
+    Then I should see "Email has already been taken"
 
 Scenario: I attempt to create an account with mismatching passwords
-    Given I am on signup
-    When I create an account with password "pass"
-    And I confirm the password as "wrongPass"
-    Then I should see "Passwords do not match"
+    Given I am on the signup page
+    When I fill out the form with password="pass", password_confirmation="wrongPass"
+    And I click "Sign Up"
+    Then I should see "Password confirmation does not match"
