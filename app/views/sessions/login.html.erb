@@ -2,6 +2,13 @@
 <body class="login">
 
   <div class="form">
+
+    <% if flash[:error] %>
+      <div class="">
+        <span class=""><%= flash[:error] %></span>
+      </div>
+    <% end %>
+
     <%= form_with url: "/login", class: "login-form" do |form| %>
       <i class="fas fa-user-circle"></i>
       <%= form.email_field :email, class:"user-input", placeholder: "Email", :required => true %>

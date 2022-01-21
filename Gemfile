@@ -76,4 +76,5 @@ group :test do
   gem 'cucumber-rails', require: false
   # database_cleaner is not mandatory, but highly recommended
   gem 'database_cleaner'
+  gem "launchy", "~> 2.1.2"
 end

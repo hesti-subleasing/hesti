@@ -9,7 +9,8 @@ class SessionsController < ApplicationController
       session[:user_id] = @user.id
       redirect_to listings_path
     else
-      redirect_to login_path
+      flash[:error] = "Incorrect email or password."
+      render :login, status: :unprocessable_entity
     end
   end
 
