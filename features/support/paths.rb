@@ -10,6 +10,9 @@ module NavigationHelpers
   
       when /the signup page/
         '/signup'
+        
+      when /the login page/
+        '/login'
 
       when /the profile page/
         '/profile'

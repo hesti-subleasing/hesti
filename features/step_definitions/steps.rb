@@ -12,8 +12,21 @@ module WithinHelpers
 end
 World(WithinHelpers)
 
+Given /the following accounts exist/ do |accounts_table|
+  accounts_table.hashes.each do |account|
+    User.create account
+  end
+end
+
+Given /the following listings exist/ do |listings_table|
+  listings_table.hashes.each do |listing|
+    listing[:user_id] = User.first.id
+    Listing.create listing
+  end
+end
+
 Given /^I am on (.+)$/ do |page_name|
-    visit path_to(page_name)
+  visit path_to(page_name)
 end
 
 Then /^I should be on (.+)$/ do |page_name|
@@ -31,7 +44,7 @@ When /^I press "([^\"]*)"(?: within "([^\"]*)")?$/ do |button, selector|
     end
 end
 
-When /^I fill out the form(?: with(?: first="([^,]*)",?)?(?: last="([^,]*)",?)?(?: username="([^,]*)",?)?(?: email="([^,]*)",?)?(?: password="([^,]*)",?)?(?: password_confirmation="([^,]*)")?)?$/ do |first, last, username, email, password, password_confimation|
+When /^I fill out the signup form(?: with(?: first="([^,]*)",?)?(?: last="([^,]*)",?)?(?: username="([^,]*)",?)?(?: email="([^,]*)",?)?(?: password="([^,]*)",?)?(?: password_confirmation="([^,]*)")?)?$/ do |first, last, username, email, password, password_confimation|
     first ||= "TestFirst"
     last ||= "TestLast"
     username ||= "user"
@@ -47,18 +60,17 @@ When /^I fill out the form(?: with(?: first="([^,]*)",?)?(?: last="([^,]*)",?)?(
     fill_in("user_password_confirmation", :with => password_confimation)
 end
 
+When /^I fill out the login form(?: with(?: email="([^,]*)",?)?(?: password="([^,]*)",?)?)?$/ do |email, password|
+  fill_in("email", :with => email)
+  fill_in("password", :with => password)
+end
+
 And /^I click "([^\"]+)"/ do |button|
     click_button(button)
 end
 
 Then /^I should see "([^\"]+)"$/ do |text|
-    page.should have_content(text)
-end
-
-Given /the following accounts exist/ do |accounts_table|
-  accounts_table.hashes.each do |account|
-    User.create account
-  end
+  page.should have_content(text)
 end
 
 When /^I create an account with username "user"$/ do
