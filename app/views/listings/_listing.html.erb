@@ -16,6 +16,11 @@
             <%= listing.num_bedrooms %> Bd X <%= listing.num_bathrooms %> Bth
             &sdot;
         <% end %>
-
+    </td>
+    <td>
+        <%= form_tag("/listings/add_favorite", method: "post", :name => "favorite", :remote => true, :id => "favorite") do %>
+            <%= check_box_tag(:favorite_val,true, false, :onclick => "javascript: document.getElementById('favorite').submit();") %>
+            <%= hidden_field :listing, value: listing.id %>
+        <% end %>
     </td>
 </tr>

@@ -27,6 +27,10 @@ class ListingsController < ApplicationController
     end
   end
 
+  def test
+    puts "wowwww"
+  end
+
   def show
     @listing = Listing.find(params[:id])
     @amenity_ids = AmenityMapping.joins(:amenity).where(listing_id: @listing.id).pluck("amenity_id")
@@ -85,5 +89,17 @@ class ListingsController < ApplicationController
 
   def amenity_params
     amenity_params = params.require(:listing).permit(amenitymapping: [])
+  end
+
+  def add_favorite
+    if params[:favorite_val] == true
+      puts "true!!"
+      @favorite = Favorites.new({user: session[:user_id], listing: params[:listing]})
+      if @favorite.save
+        puts "successfully saved!"
+      end
+    else
+
+    end
   end
 end

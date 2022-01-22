@@ -33,6 +33,10 @@ class UsersController < ApplicationController
       id = session[:user_id]
       @user = User.find(id)
       @listings = Listing.where(user_id: id)
+
+
+      #### change later
+      @favorites = Listing.first(2)
     else
       redirect_to root_path
     end
