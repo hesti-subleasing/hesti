@@ -86,11 +86,11 @@ test: &test
 #
 production:
   <<: *default
-  database: <%= ENV['RDS_DATABASE'] %>
-  username: <%= ENV['RDS_USERNAME'] %>
-  password: <%= ENV['RDS_PASSWORD'] %>
-  host: <%= ENV['RDS_HOST'] %>
-  port: 5432
+  database: <%= ENV['DATABASE_URL'] %>
+  # username: <%= ENV['RDS_USERNAME'] %>
+  # password: <%= ENV['RDS_PASSWORD'] %>
+  # host: <%= ENV['RDS_HOST'] %>
+  # port: 5432
 
 test: &test
   <<: *default
