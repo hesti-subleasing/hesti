@@ -1,0 +1,13 @@
+<i class="fas fa-user-plus"></i>
+
+<%= render partial: "field", locals: {form: form, type: "text", attribute: :first_name, placeholder: "First Name", errors: errors} %>
+
+<%= render partial: "field", locals: {form: form, type: "text", attribute: :last_name, placeholder: "Last Name", errors: errors} %>
+
+<%= render partial: "field", locals: {form: form, type: "text", attribute: :username, placeholder: "Username", errors: errors} %>
+
+<%= render partial: "field", locals: {form: form, type: "email", attribute: :email, placeholder: "Email", errors: errors} %>
+
+<%= render partial: "field", locals: {form: form, type: "password", attribute: :password, placeholder: "Password", errors: errors} %>
+
+<%= render partial: "field", locals: {form: form, type: "password", attribute: :password_confirmation, placeholder: "Confirm Password", errors: errors} %>
