@@ -1,0 +1,34 @@
+<% invalid = errors.include?(attribute) %>
+
+<span class="field">
+
+
+
+<% case type
+       when "text" %>
+        <%= form.text_field attribute, class:"user-input #{'is-invalid' if invalid} #{classes if defined?(classes)}", placeholder: placeholder %>
+    <% when "number" %>
+        <%= form.number_field attribute, class:"user-input #{'is-invalid' if invalid} #{classes if defined?(classes)}", placeholder: placeholder %>
+    <% when "rent" %>
+        <div class="form-inline">
+            <span> $ </span>
+            <%= form.number_field attribute, class:"user-input #{'is-invalid' if invalid} #{classes if defined?(classes)}", placeholder: placeholder %>
+            <span> /month </span>
+         </div>
+    <% when "date" %>
+        <%= form.date_field attribute, class:"user-input #{'is-invalid' if invalid} #{classes if defined?(classes)}", placeholder: placeholder %>
+    <% when "radio" %>
+        <%= form.radio_button attribute, class:"user-input #{'is-invalid' if invalid} #{classes if defined?(classes)}", placeholder: placeholder %>
+    <% when "text-area" %>
+        <%= form.text_area attribute, class:"user-input #{'is-invalid' if invalid} #{classes if defined?(classes)}", placeholder: placeholder %>
+<% end %>
+
+<% if invalid %>
+  <div class="invalid-feedback d-block">
+    <% errors.full_messages_for(attribute).each do |error_message| %>
+      <%= error_message %>.
+    <% end %>
+  </div>
+<% end %>
+
+</span>

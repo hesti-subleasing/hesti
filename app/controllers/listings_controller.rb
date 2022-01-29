@@ -8,6 +8,8 @@ class ListingsController < ApplicationController
     if session[:user_id]
       @listing = Listing.new
       @amenities = Amenity.all
+    else
+      redirect_to root_path
     end
   end
 
@@ -23,7 +25,8 @@ class ListingsController < ApplicationController
       redirect_to listing_path(@listing)
     else
       puts @listing.errors.full_messages
-      render :new
+      @amenities = Amenity.all
+      render :new, status: :unprocessable_entity
     end
   end
 
