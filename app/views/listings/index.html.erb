@@ -1,5 +1,17 @@
 <h1>Listings</h1>
 <%# <p>Find me in app/views/listings/index.html.erb</p> %>
+<%= form_with url: listings_path, method: :get do |form| %>
+    <%= form.label :bedroom %>
+    <%= select_tag :bedroom, options_for_select(["","Private", "Shared"], params[:bedroom]), onchange: "this.form.submit()" %>
+    <%= form.label :bathroom %>
+    <%= select_tag :bathroom, options_for_select(["","Private", "Shared"], params[:bathroom]), onchange: "this.form.submit()" %>
+    <%= form.label :amenities %>
+    <% @amenities.each do |amenity| %>
+        <%= form.check_box :amenitymapping, { multiple: true, onchange: "this.form.submit()", checked: !@amenities_checked.blank? && @amenities_checked.include?(amenity.amenity_name) }, amenity.id %>
+        <%= label_tag(:amenitymapping, amenity.amenity_name) %>
+    <% end %>
+<% end %>
+
 
 <div class="listings-wrapper">
     <table>
