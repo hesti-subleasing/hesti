@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('build') {
             steps {
-                sh '~/.rbenv/shims/ruby --version'
+                sh '/home/ec2-user/.rbenv/shims/ruby --version'
             }
         }
     }
