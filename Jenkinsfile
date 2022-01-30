@@ -9,6 +9,6 @@ pipeline {
     }
 
     environment {
-        PATH = /home/ec2-user
+        PATH = $PATH:/home/ec2-user
     }
 }
