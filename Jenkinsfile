@@ -3,12 +3,8 @@ pipeline {
     stages {
         stage('build') {
             steps {
-                sh 'ruby --version'
+                sh '~/.rbenv/shims/ruby --version'
             }
         }
-    }
-
-    environment {
-        Path = /home/ec2-user
     }
 }
