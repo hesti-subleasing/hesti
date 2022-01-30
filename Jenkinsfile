@@ -1,4 +1,3 @@
-#!/bin/bash -l
 pipeline {
     agent any
     stages {
@@ -7,5 +6,9 @@ pipeline {
                 sh 'ruby --version'
             }
         }
+    }
+
+    environment {
+        PATH = /home/ec2-user
     }
 }
