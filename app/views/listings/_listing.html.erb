@@ -1,6 +1,7 @@
-<tr>
-    <td><%= image_tag ("bedroom.jpg") %></td>
-    <td style="color: white">
+<%= link_to listing_path(listing.id), target: :_blank, style: "text-decoration: none;" do %>
+    <div style="display: grid; grid-template-columns: 30% 30%; justify-content: center; justify-items: center; align-items: center;">
+    <div><%= image_tag ("bedroom.jpg"), style: "width: 60%; height: 60%", align: "right" %></div>
+    <div style="color: white">
         <h3><%= listing.title %></h3>
         <% if listing.apt_complex %>
             <%= listing.apt_complex %>
@@ -17,5 +18,7 @@
             &sdot;
         <% end %>
 
-    </td>
-</tr>
+    </div>
+    </div>
+<% end %>
+<hr/>
