@@ -36,7 +36,6 @@ class UsersController < ApplicationController
       # count who favorited
       listingIDs = Listing.where(user_id: id).pluck("id")
       @favorited_by = Favorite.where(listing_id: listingIDs).group(:listing_id).count    # number of ppl who have liked each listing
-      p @favorited_by
 
 
       favoriteIDs = Favorite.where(user_id: id).pluck("listing_id")
