@@ -14,7 +14,10 @@ Rails.application.routes.draw do
   post "logout" => "sessions#destroy", :as => "logout_post"
   get "logout" => "sessions#destroy", :as => "logout"
 
+
   resources :listings
+
+  post "listings/favorite" => "listings#favorite", :as => "favorite"
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

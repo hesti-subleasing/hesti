@@ -2,12 +2,38 @@
 class ListingsController < ApplicationController
   def index
     @listings = Listing.all
+    @amenities = Amenity.all
+    @amenities_checked = []
+    if check_filters
+      str = filter.chomp(" AND ")
+      @listings = Listing.where(str)
+      amenities = params[:amenitymapping].select { |amenity_id| amenity_id != "0" }
+      if !amenities.blank?
+        listing_ids = Listing.where(str).pluck("id")
+        @amenities_checked = Amenity.where(id: amenities).pluck("amenity_name")
+        amenities_filtered = AmenityMapping.where(amenity_id: amenities).where(listing_id: listing_ids).pluck("listing_id")
+        official = []
+        amenities_filtered.each do |id|
+          if (amenities_filtered.count(id) == amenities.count)
+            official.push(id)
+          end
+          amenities_filtered.delete(id)
+        end
+        @listings = Listing.where(id: official)
+      end
+    end
+    @favorites = []
+    if session[:user_id]
+      @favorites = Favorite.where(user_id: session[:user_id]).pluck("listing_id")
+    end
   end
 
   def new
     if session[:user_id]
       @listing = Listing.new
       @amenities = Amenity.all
+    else
+      redirect_to root_path
     end
   end
 
@@ -17,14 +43,19 @@ class ListingsController < ApplicationController
     if @listing.save 
       if amenity_params.has_key?("amenitymapping")
         for amenity in amenity_params["amenitymapping"]
-          @amenity_mapping = AmenityMapping.create(listing_id: @listing.id, amenity_id: amenity)
+          @amenity_mapping = AmenityMapping.create(listing_id: @listing.id, amenity_id: amenity).pluck("listing_id")
         end
       end
       redirect_to listing_path(@listing)
     else
       puts @listing.errors.full_messages
-      render :new
+      @amenities = Amenity.all
+      render :new, status: :unprocessable_entity
     end
+  end
+
+  def test
+    puts "wowwww"
   end
 
   def show
@@ -76,6 +107,30 @@ class ListingsController < ApplicationController
     end
   end
 
+  def check_filters
+    return (!params[:bedroom].blank? or !params[:bathroom].blank? or !params[:amenitymapping].blank?)
+  end
+
+  def filter
+    @filters = {}
+    if !params[:bedroom].blank? 
+      @filters["private_bedroom"] = params[:bedroom] == "Private" ? "true" : "false"
+    end
+
+    if !params[:bathroom].blank?
+      @filters["private_bathroom"] = params[:bathroom] == "Private" ? "true" : "false"
+    end
+
+    # p @filters
+    @listings = Listing.all
+    str = ""
+    @filters.each do |key, val|
+      str.concat(key + " = " + val + " AND ")
+    end
+
+    return str
+  end
+
   def listing_params
     list_params = params.require(:listing)
                         .permit(:title, :address_line_1, :address_line_2, :city, :state, :zip_code, :apt_complex, :rent, :lease_start, :lease_end, :private_bedroom, :private_bathroom, :num_roommates, :num_bedrooms, :num_bathrooms, :num_pets, :description, :user_id)
@@ -85,5 +140,18 @@ class ListingsController < ApplicationController
 
   def amenity_params
     amenity_params = params.require(:listing).permit(amenitymapping: [])
+  end
+
+  def favorite
+    if params[:favorite].length() == 2 and session[:user_id]
+      @favorite = Favorite.new({user_id: session[:user_id], listing_id: params[:favorite_val]})
+      if @favorite.save
+        puts "savved"
+      end
+    elsif params[:favorite].length() == 2
+      redirect_to login_path
+    elsif params[:favorite].length() == 1
+      Favorite.destroy_by(user_id: session[:user_id], listing_id: params[:favorite_val])
+    end
   end
 end
