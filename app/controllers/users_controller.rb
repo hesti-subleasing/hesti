@@ -33,10 +33,13 @@ class UsersController < ApplicationController
       id = session[:user_id]
       @user = User.find(id)
       @listings = Listing.where(user_id: id)
+      # count who favorited
+      listingIDs = Listing.where(user_id: id).pluck("id")
+      @favorited_by = Favorite.where(listing_id: listingIDs).group(:listing_id).count    # number of ppl who have liked each listing
+      p @favorited_by
 
 
-      favoriteIDs = Favorite.where(user_id: session[:user_id]).pluck("listing_id")
-      p favoriteIDs
+      favoriteIDs = Favorite.where(user_id: id).pluck("listing_id")
       @favorites = Listing.find(favoriteIDs)
     else
       redirect_to login_path
