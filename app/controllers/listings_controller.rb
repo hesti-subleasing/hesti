@@ -43,7 +43,7 @@ class ListingsController < ApplicationController
     if @listing.save 
       if amenity_params.has_key?("amenitymapping")
         for amenity in amenity_params["amenitymapping"]
-          @amenity_mapping = AmenityMapping.create(listing_id: @listing.id, amenity_id: amenity).pluck("listing_id")
+          @amenity_mapping = AmenityMapping.create(listing_id: @listing.id, amenity_id: amenity)
         end
       end
       redirect_to listing_path(@listing)
