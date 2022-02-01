@@ -18,9 +18,9 @@
         <% end %>
     </td>
     <td>
-        <%= form_tag("/listings/add_favorite", method: "post", :name => "favorite", :remote => true, :id => "favorite") do %>
-            <%= check_box_tag(:favorite_val,true, false, :onclick => "javascript: document.getElementById('favorite').submit();") %>
-            <%= hidden_field :listing, value: listing.id %>
+        <%= form_with url: "/listings/favorite", method: :post, :local => false, :remote => true do |form| %>
+            <%= form.check_box :favorite, { multiple: true, onchange: "this.form.submit()", checked: !@favorites.blank? && @favorites.include?(listing.id) }, true %>
+            <%= form.hidden_field :favorite_val, value: listing.id %>
         <% end %>
     </td>
 </tr>

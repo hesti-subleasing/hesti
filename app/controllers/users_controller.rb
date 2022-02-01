@@ -35,10 +35,11 @@ class UsersController < ApplicationController
       @listings = Listing.where(user_id: id)
 
 
-      #### change later
-      @favorites = Listing.first(2)
+      favoriteIDs = Favorite.where(user_id: session[:user_id]).pluck("listing_id")
+      p favoriteIDs
+      @favorites = Listing.find(favoriteIDs)
     else
-      redirect_to root_path
+      redirect_to login_path
     end
   end
 

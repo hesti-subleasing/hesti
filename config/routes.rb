@@ -17,7 +17,7 @@ Rails.application.routes.draw do
 
   resources :listings
 
-  post "listings/add_favorite" => "listings#add_favorite", :as => "add_favorite"
+  post "listings/favorite" => "listings#favorite", :as => "favorite"
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
