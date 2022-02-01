@@ -11,13 +11,12 @@ class ListingsController < ApplicationController
       if !amenities.blank?
         listing_ids = Listing.where(str).pluck("id")
         @amenities_checked = Amenity.where(id: amenities).pluck("amenity_name")
-        amenities_filtered = AmenityMapping.where(amenity_id: amenities).where(listing_id: listing_ids).pluck("listing_id")
+        amenities_filtered = AmenityMapping.where(amenity_id: amenities).where(listing_id: listing_ids).group(:listing_id).count
         official = []
-        amenities_filtered.each do |id|
-          if (amenities_filtered.count(id) == amenities.count)
-            official.push(id)
+        amenities_filtered.each do |listing_id, count|
+          if (count == amenities.count)
+            official.push(listing_id)
           end
-          amenities_filtered.delete(id)
         end
         @listings = Listing.where(id: official)
       end
