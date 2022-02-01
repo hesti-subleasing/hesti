@@ -12,8 +12,8 @@
 <%= button_to "Create Listing", new_listing_path, method: :get, class: "button" %>
 
 <h3>My Listings</h3>
-<%= render partial: "listing", collection: @listings, locals: {favorited_by: @favorited_by} %>
+<%= render partial: "listing", collection: @listings, locals: {favorited_by: @favorited_by, favorite_option: false} %>
 
 
 <h3>My Favorites</h3>
-<%= render partial: "listing", collection: @favorites, locals: {favorited_by: []} %>
+<%= render partial: "listing", collection: @favorites, locals: {favorited_by: [], favorite_option: true} %>

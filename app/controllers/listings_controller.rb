@@ -143,15 +143,22 @@ class ListingsController < ApplicationController
   end
 
   def favorite
-    if params[:favorite].length() == 2 and session[:user_id]
-      @favorite = Favorite.new({user_id: session[:user_id], listing_id: params[:favorite_val]})
-      if @favorite.save
-        puts "savved"
+    if params[:favorite].is_a?(Array)
+      if params[:favorite].length() == 2 and session[:user_id]
+        @favorite = Favorite.new({user_id: session[:user_id], listing_id: params[:favorite_val]})
+        if @favorite.save
+          puts "savved"
+        end
+      elsif params[:favorite].length() == 2
+        redirect_to login_path
+      elsif params[:favorite].length() == 1
+        Favorite.destroy_by(user_id: session[:user_id], listing_id: params[:favorite_val])
       end
-    elsif params[:favorite].length() == 2
-      redirect_to login_path
-    elsif params[:favorite].length() == 1
-      Favorite.destroy_by(user_id: session[:user_id], listing_id: params[:favorite_val])
+    elsif params[:favorite].is_a?(String)
+      if params[:favorite] == "Remove Favorite"
+        Favorite.destroy_by(user_id: session[:user_id], listing_id: params[:favorite_val])
+        redirect_to profile_path
+      end
     end
   end
 end

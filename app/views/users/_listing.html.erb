@@ -19,9 +19,16 @@
             <% end %>
             <% if listing.user_id == session[:user_id] %>
                 <%= button_to "Edit Listing", edit_listing_path(listing.id), method: :get, class: "button" %>
-                <%= button_to "Delete Listing", listing_path(listing.id), method: :delete, class: "button" %>
+                <%= button_to "Delete Listing", listing_path(listing.id), method: :delete, data: { confirm: "Are you sure?" }, class: "button" %>
                 <% if favorited_by.is_a?(Hash) %>
                     <p>Number of users who have favorited this listing:</p><%= favorited_by[listing.id] ? favorited_by[listing.id] : "0" %>
+                <% end %>
+            <% end %>
+
+            <% if favorite_option %>
+                <%= form_with url: "/listings/favorite", method: :post do |form| %>
+                    <%= form.hidden_field :favorite_val, value: listing.id %>
+                    <%= form.submit "Remove Favorite", name: "favorite", class: "button" %>
                 <% end %>
             <% end %>
         </div>
