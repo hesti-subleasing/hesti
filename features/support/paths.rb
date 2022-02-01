@@ -19,6 +19,9 @@ module NavigationHelpers
         
       when /the listings page/
         '/listings'
+
+      when /^the listing details page for id (.*)$/
+        '/listings/' + $1
   
       # Add more mappings here.
       # Here is an example that pulls values out of the Regexp:

@@ -1,18 +1,24 @@
-<h1>Users#edit</h1>
-<p>Find me in app/views/users/edit.html.erb</p>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Hesti</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
 
-<h2>Edit Account Info</h2>
+    <%= stylesheet_link_tag "/users/new.css", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
 
-<%= form_with model: @user, url: update_user_path, method: :put do |user_form| %>
-    <%= label :user, :first_name, "First Name" %>
-    <%= user_form.text_field :first_name, class:"user-input", placeholder: "First Name", :required => true %>
-    <%= label :user, :last_name, "Last Name" %>
-    <%= user_form.text_field :last_name, class:"user-input", placeholder: "Last Name", :required => true %>
-    <%= label :user, :username, "Username" %>
-    <%= user_form.text_field :username, class:"user-input", placeholder: "Username", :required => true %>
-    <%= label :user, :email, "Email" %>
-    <%= user_form.email_field :email, class:"user-input", placeholder: "Email", :required => true %>
-    <%= label :user, :password, "Password" %>
-    <%= user_form.password_field :password, class:"user-input", placeholder: "Password",:required => true %>
-    <%= user_form.submit "Sign Up", class: "btn" %>
-<% end %>
+  <body class="signup">
+    <h1 style="position: absolute;top: -47px;">Edit Account Info</h1>
+
+    <div class = "signup-form">
+        <%= form_with model: @user, url: update_user_path, local: true, method: :put do |user_form| %>
+            <%= render partial: "form", locals: {form: user_form, errors: @user.errors} %>
+            <%= user_form.submit "Submit", class: "btn" %>
+        <% end %>
+    </div>
+  </body>
+  
+</html>

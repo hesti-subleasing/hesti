@@ -21,7 +21,13 @@ end
 Given /the following listings exist/ do |listings_table|
   listings_table.hashes.each do |listing|
     listing[:user_id] = User.first.id
-    Listing.create listing
+    Listing.new(listing) do |l|
+      if listing[:id]
+        puts("changing listing id")
+        l.id = listing[:id]
+      end
+      l.save
+    end
   end
 end
 
@@ -65,7 +71,7 @@ When /^I fill out the login form(?: with(?: email="([^,]*)",?)?(?: password="([^
   fill_in("password", :with => password)
 end
 
-And /^I click "([^\"]+)"/ do |button|
+And /^I click "([^\"]+)"$/ do |button|
     click_button(button)
 end
 

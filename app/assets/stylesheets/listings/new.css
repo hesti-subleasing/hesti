@@ -46,13 +46,16 @@ textarea {
 .listing_inputs .user-input {
     width: 330px;
     height: 33px;
-    margin-bottom: 30px;
     outline: none;
     border: none;
     border-bottom: 2px solid white;
     background: rgba(255, 255, 255, 0);
     color: #fff;
     font-size: 18px;
+}
+
+.form-inline div {
+    display: inline;
 }
 
 .user-input:focus {
@@ -66,12 +69,14 @@ textarea {
     flex-wrap:wrap;
     justify-content: center;
     align-items: center;
-}
-
-.listing_inputs .col {
     column-count: 2;
     column-gap: 40px;
-} 
+}
+
+.col_3 span {
+    width: 160px;
+    margin-bottom: 30px;
+}
 
 .listing_inputs:hover p, input:hover::placeholder {
     color:  white;

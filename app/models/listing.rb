@@ -7,4 +7,5 @@ class Listing < ApplicationRecord
   validates :zip_code, presence: true
   validates :rent, presence: true
   has_many :amenities, :through => :amenitymapping
+  has_many :users, :through => :favorite
 end

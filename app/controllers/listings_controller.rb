@@ -22,12 +22,18 @@ class ListingsController < ApplicationController
         @listings = Listing.where(id: official)
       end
     end
+    @favorites = []
+    if session[:user_id]
+      @favorites = Favorite.where(user_id: session[:user_id]).pluck("listing_id")
+    end
   end
 
   def new
     if session[:user_id]
       @listing = Listing.new
       @amenities = Amenity.all
+    else
+      redirect_to root_path
     end
   end
 
@@ -37,14 +43,19 @@ class ListingsController < ApplicationController
     if @listing.save 
       if amenity_params.has_key?("amenitymapping")
         for amenity in amenity_params["amenitymapping"]
-          @amenity_mapping = AmenityMapping.create(listing_id: @listing.id, amenity_id: amenity)
+          @amenity_mapping = AmenityMapping.create(listing_id: @listing.id, amenity_id: amenity).pluck("listing_id")
         end
       end
       redirect_to listing_path(@listing)
     else
       puts @listing.errors.full_messages
-      render :new
+      @amenities = Amenity.all
+      render :new, status: :unprocessable_entity
     end
+  end
+
+  def test
+    puts "wowwww"
   end
 
   def show
@@ -131,4 +142,16 @@ class ListingsController < ApplicationController
     amenity_params = params.require(:listing).permit(amenitymapping: [])
   end
 
+  def favorite
+    if params[:favorite].length() == 2 and session[:user_id]
+      @favorite = Favorite.new({user_id: session[:user_id], listing_id: params[:favorite_val]})
+      if @favorite.save
+        puts "savved"
+      end
+    elsif params[:favorite].length() == 2
+      redirect_to login_path
+    elsif params[:favorite].length() == 1
+      Favorite.destroy_by(user_id: session[:user_id], listing_id: params[:favorite_val])
+    end
+  end
 end
