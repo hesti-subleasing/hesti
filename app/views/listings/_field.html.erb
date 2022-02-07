@@ -2,8 +2,6 @@
 
 <span class="field">
 
-
-
 <% case type
        when "text" %>
         <%= form.text_field attribute, class:"user-input #{'is-invalid' if invalid} #{classes if defined?(classes)}", placeholder: placeholder %>

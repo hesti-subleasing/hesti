@@ -18,18 +18,18 @@ Scenario: I create a new account
 
 Scenario: I attempt to create an account with a duplicate username
     Given I am on the signup page
-    When I fill out the signup form with username="user"
+    When I sign up with username="user"
     And I click "Sign Up"
     Then I should see "Username has already been taken"
 
 Scenario: I attempt to create an account with a duplicate email
     Given I am on the signup page
-    When I fill out the signup form with email="test@tamu.edu"
+    When I sign up with email="test@tamu.edu"
     And I click "Sign Up"
     Then I should see "Email has already been taken"
 
 Scenario: I attempt to create an account with mismatching passwords
     Given I am on the signup page
-    When I fill out the signup form with password="pass", password_confirmation="wrongPass"
+    When I sign up with password="pass", password_confirmation="wrongPass"
     And I click "Sign Up"
     Then I should see "Password confirmation does not match"

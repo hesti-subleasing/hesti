@@ -50,7 +50,23 @@ When /^I press "([^\"]*)"(?: within "([^\"]*)")?$/ do |button, selector|
     end
 end
 
-When /^I fill out the signup form(?: with(?: first="([^,]*)",?)?(?: last="([^,]*)",?)?(?: username="([^,]*)",?)?(?: email="([^,]*)",?)?(?: password="([^,]*)",?)?(?: password_confirmation="([^,]*)")?)?$/ do |first, last, username, email, password, password_confimation|
+When /^I fill out the signup form with(?: first="([^,]*)",?)?(?: last="([^,]*)",?)?(?: username="([^,]*)",?)?(?: email="([^,]*)",?)?(?: password="([^,]*)",?)?(?: password_confirmation="([^,]*)")?$/ do |first, last, username, email, password, password_confimation|
+  first ||= ""
+  last ||= ""
+  username ||= ""
+  email ||= ""
+  password ||= ""
+  password_confimation ||= ""
+
+  fill_in("user_first_name", :with => first)
+  fill_in("user_last_name", :with => last)
+  fill_in("user_username", :with => username)
+  fill_in("user_email", :with => email)
+  fill_in("user_password", :with => password)
+  fill_in("user_password_confirmation", :with => password_confimation)
+end
+
+When /^I sign up with(?: first="([^,]*)",?)?(?: last="([^,]*)",?)?(?: username="([^,]*)",?)?(?: email="([^,]*)",?)?(?: password="([^,]*)",?)?(?: password_confirmation="([^,]*)")?$/ do |first, last, username, email, password, password_confimation|
     first ||= "TestFirst"
     last ||= "TestLast"
     username ||= "user"
@@ -69,6 +85,22 @@ end
 When /^I fill out the login form(?: with(?: email="([^,]*)",?)?(?: password="([^,]*)",?)?)?$/ do |email, password|
   fill_in("email", :with => email)
   fill_in("password", :with => password)
+end
+
+When /^I fill out the listing form(?: with(?: title="([^,]*)",?)?(?: address_1="([^,]*)",?)?(?: address_2="([^,]*)",?)?(?: city="([^,]*)",?)?(?: state="([^,]*)",?)?(?: zip_code="([^,]*)",?)?(?: apt="([^,]*)",?)?(?: rent="([^,]*)",?)?(?: private_bed="([^,]*)",?)?(?: private_bath="([^,]*)",?)?(?: roommates="([^,]*)",?)?(?: num_beds="([^,]*)",?)?(?: pets="([^,]*)",?)?(?: description="([^,]*)",?)?)?$/ do |title, address_1, address_2, city, state, zip_code, apt, rent, private_bed, private_bath, roommates, num_beds, num_baths, pets, description|
+  title ||= "TestFirst"
+  last ||= "TestLast"
+  username ||= "user"
+  email ||= "test@tamu.edu"
+  password ||= "pass"
+  password_confimation ||= password
+
+  fill_in("user_first_name", :with => first)
+  fill_in("user_last_name", :with => last)
+  fill_in("user_username", :with => username)
+  fill_in("user_email", :with => email)
+  fill_in("user_password", :with => password)
+  fill_in("user_password_confirmation", :with => password_confimation)
 end
 
 And /^I click "([^\"]+)"$/ do |button|
