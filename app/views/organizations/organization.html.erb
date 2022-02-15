@@ -1,0 +1,11 @@
+<h1>Organizations#organization</h1>
+
+<h3>ADMIN of <%= @org.name %></h3>
+
+<%= button_to "Edit Account", edit_user_path, method: :get, class: "button" %>
+<%= button_to "Edit Organization Settings", edit_org_path(@org), method: :get, class: "button" %>
+<%= button_to "Deactivate my Account", deactivate_path, method: :delete, class: "button", data: { confirm: "Are you sure?" } %>
+
+<h3>Current Settings:</h3>
+<h3>Organization Name: <%= @org.name%> </h3>
+<h3>Background Color: <span style="background-color: <%= @org.bg_color%>">&emsp;</span> <%=@org.bg_color%> </h3>

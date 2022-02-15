@@ -32,6 +32,9 @@ class UsersController < ApplicationController
     if session[:user_id]
       id = session[:user_id]
       @user = User.find(id)
+      if @user.is_admin
+        redirect_to organization_path(@user.organization_id)
+      end
       @listings = Listing.where(user_id: id)
       # count who favorited
       listingIDs = Listing.where(user_id: id).pluck("id")

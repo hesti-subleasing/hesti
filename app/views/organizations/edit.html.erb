@@ -1,0 +1,10 @@
+<h1>Organizations#edit</h1>
+
+<%= form_with model: @org, url: update_org_path, method: :put do |form| %>
+
+    <h3>Organization Name: <%= form.text_field "name" %></h3>
+    <h3>Background Color: <%= form.color_field "bg_color", value: @org.bg_color%></h3>
+    
+    <br>
+    <%= form.submit "Submit", class: "button" %> 
+<% end %>

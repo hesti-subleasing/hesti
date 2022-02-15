@@ -8,16 +8,20 @@ Rails.application.routes.draw do
   put "update" => "users#update", :as => "update_user"
   get "profile" => "users#show", :as => "profile"
   delete "destroy" => "users#destroy", :as => "deactivate"
-
+  
   get "login"  => "sessions#login", :as => "login"
   post "login"  => "sessions#create", :as => "login_post"
   post "logout" => "sessions#destroy", :as => "logout_post"
   get "logout" => "sessions#destroy", :as => "logout"
-
+  
 
   resources :listings
-
+  
   post "listings/favorite" => "listings#favorite", :as => "favorite"
+  
+  get "organization/:id" => "organizations#organization", :as => "organization"
+  get "organizations/:id/edit" => "organizations#edit", :as => "edit_org"
+  put "organizations/:id" => "organizations#update", :as => "update_org"
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
