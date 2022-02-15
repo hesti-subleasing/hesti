@@ -120,7 +120,6 @@ class ListingsController < ApplicationController
       @filters["private_bathroom"] = params[:bathroom] == "Private" ? "true" : "false"
     end
 
-    # p @filters
     @listings = Listing.all
     str = ""
     @filters.each do |key, val|

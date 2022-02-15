@@ -8,4 +8,9 @@
 
 <h3>Current Settings:</h3>
 <h3>Organization Name: <%= @org.name%> </h3>
-<h3>Background Color: <span style="background-color: <%= @org.bg_color%>">&emsp;</span> <%=@org.bg_color%> </h3>
+<h3>Background Color: <span style="background-color: <%= @org.color%>">&emsp;</span> <%=@org.color%> </h3>
+
+<h3>Users associated with this organization:</h3>
+<% @members.each do |user|%>
+    <ul><%=user%></ul>
+<% end %>

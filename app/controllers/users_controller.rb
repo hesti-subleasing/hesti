@@ -33,8 +33,11 @@ class UsersController < ApplicationController
       id = session[:user_id]
       @user = User.find(id)
       if @user.is_admin
-        redirect_to organization_path(@user.organization_id)
+        redirect_to organization_path
       end
+      
+      @org = Organization.find(@user.organization_id)
+
       @listings = Listing.where(user_id: id)
       # count who favorited
       listingIDs = Listing.where(user_id: id).pluck("id")
@@ -81,7 +84,8 @@ class UsersController < ApplicationController
       @user = User.find(session[:user_id])
       @user.destroy
       session.delete(:user_id)
-      # flash[:notice] = "Movie '#{@movie.title}' deleted."
+      session.delete(:admin)
+      session.delete(:org_color)
     end
     redirect_to root_path
   end

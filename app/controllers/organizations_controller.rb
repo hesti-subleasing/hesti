@@ -5,21 +5,17 @@ class OrganizationsController < ApplicationController
       id = session[:user_id]
       @user = User.find(id)
       if !@user.is_admin
-        redirect_to profile_path(id)
+        redirect_to profile_path
       end
+      
+      # if @user.organization_id != params[:id].to_i
+      #   redirect_to root_path
+      #   return
+      # end
 
       # ppl who are part of the org
       @members = User.where(organization_id: @user.organization_id).pluck("username")
       @org = Organization.find(@user.organization_id)
-      # @bg = Organization.find(@user.organization_id).pluck("bg_color")
-      # @listings = Listing.where(user_id: id)
-      # # count who favorited
-      # listingIDs = Listing.where(user_id: id).pluck("id")
-      # @favorited_by = Favorite.where(listing_id: listingIDs).group(:listing_id).count    # number of ppl who have liked each listing
-
-
-      # favoriteIDs = Favorite.where(user_id: id).pluck("listing_id")
-      # @favorites = Listing.find(favoriteIDs)
     else
       redirect_to login_path
     end
@@ -29,7 +25,7 @@ class OrganizationsController < ApplicationController
     if session[:user_id]
       @user = User.find(session[:user_id])
       if !@user.is_admin
-        redirect_to profile_path(session[:user_id])
+        redirect_to profile_path
       end
       
       @org = Organization.find(params[:id])
@@ -42,10 +38,11 @@ class OrganizationsController < ApplicationController
   def update
     @org = Organization.find(params[:id])
     @org.update!(org_params)
-    redirect_to organization_path(params[:id])
+    session[:org_color] = @org.color
+    redirect_to organization_path
   end
 
   def org_params
-    params.require(:organization).permit(:name, :bg_color)
+    params.require(:organization).permit(:name, :color)
   end
 end

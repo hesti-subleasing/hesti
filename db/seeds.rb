@@ -11,4 +11,4 @@
 #     Amenity.create(amenity_name: amenity)
 # end
 
-Organization.create(name: "TAMU", bg_color: "#800000")
+Organization.create(name: "TAMU", color: "#800000")

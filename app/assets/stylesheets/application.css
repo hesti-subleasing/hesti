@@ -33,7 +33,7 @@ h1 {
 .navBar {
   height: calc(3em + 15px);
   width:100vw;
-  background-color: white;
+  background-color: var(--nav-color);
   position: absolute;
   top:0;
 }

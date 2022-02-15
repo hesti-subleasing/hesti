@@ -19,7 +19,7 @@ Rails.application.routes.draw do
   
   post "listings/favorite" => "listings#favorite", :as => "favorite"
   
-  get "organization/:id" => "organizations#organization", :as => "organization"
+  get "organization" => "organizations#organization", :as => "organization"
   get "organizations/:id/edit" => "organizations#edit", :as => "edit_org"
   put "organizations/:id" => "organizations#update", :as => "update_org"
 
