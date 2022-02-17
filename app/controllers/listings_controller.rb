@@ -9,24 +9,13 @@ class ListingsController < ApplicationController
       @listings = Listing.all
     end
     @amenities = Amenity.all
-    @amenities_checked = []
+    @amenities_checked = get_amenities_checked
+    @search = params[:query]
+    
     if check_filters
-      str = filter.chomp(" AND ")
-      @listings = Listing.where(user_id: @members).where(str)
-      amenities = params[:amenitymapping].select { |amenity_id| amenity_id != "0" }
-      if !amenities.blank?
-        listing_ids = Listing.where(user_id: @members).where(str).pluck("id")
-        @amenities_checked = Amenity.where(id: amenities).pluck("amenity_name")
-        amenities_filtered = AmenityMapping.where(amenity_id: amenities).where(listing_id: listing_ids).group(:listing_id).count
-        official = []
-        amenities_filtered.each do |listing_id, count|
-          if (count == amenities.count)
-            official.push(listing_id)
-          end
-        end
-        @listings = Listing.where(id: official)
-      end
+      @listings = filter
     end
+
     @favorites = []
     if session[:user_id]
       @favorites = Favorite.where(user_id: session[:user_id]).pluck("listing_id")
@@ -118,26 +107,30 @@ class ListingsController < ApplicationController
   end
 
   def check_filters
-    return (!params[:bedroom].blank? or !params[:bathroom].blank? or !params[:amenitymapping].blank?)
+    return (!params[:bedroom].blank? or !params[:bathroom].blank? or !params[:amenitymapping].blank? or !params[:query].blank?)
   end
 
   def filter
-    @filters = {}
-    if !params[:bedroom].blank? 
-      @filters["private_bedroom"] = params[:bedroom] == "Private" ? "true" : "false"
+    if session[:user_id]
+      user = User.find(session[:user_id])
+      @members = User.where(organization_id: user.organization_id)
+      listings = Listing.where(user_id: @members)
+    else
+      listings = Listing.all
     end
+    
+    amenities = params[:amenitymapping] ? params[:amenitymapping].select { |amenity_id| amenity_id != "0" } : []
 
-    if !params[:bathroom].blank?
-      @filters["private_bathroom"] = params[:bathroom] == "Private" ? "true" : "false"
-    end
+    listings = listings.filter_by_bedroom(params[:bedroom]) if params[:bedroom].present?
+    listings = listings.filter_by_bathroom(params[:bathroom]) if params[:bathroom].present?
+    listings = listings.filter_by_query(params[:query]) if params[:query].present?
+    listings = listings.filter_by_amenities(amenities) if amenities.present?
 
-    # @listings = Listing.all
-    str = ""
-    @filters.each do |key, val|
-      str.concat(key + " = " + val + " AND ")
-    end
+    return listings
+  end
 
-    return str
+  def get_amenities_checked
+    return Amenity.where(id: params[:amenitymapping] ? params[:amenitymapping].select { |amenity_id| amenity_id != "0" } : []).pluck("amenity_name")
   end
 
   def listing_params

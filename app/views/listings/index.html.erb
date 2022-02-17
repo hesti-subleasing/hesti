@@ -1,6 +1,9 @@
 <h1>Listings</h1>
 <%# <p>Find me in app/views/listings/index.html.erb</p> %>
 <%= form_with url: listings_path, method: :get do |form| %>
+    <%= form.label :query %>
+    <%= form.text_field :query, onchange: "this.form.submit()", value: @search %>
+    <br>
     <%= form.label :bedroom %>
     <%= select_tag :bedroom, options_for_select(["","Private", "Shared"], params[:bedroom]), onchange: "this.form.submit()" %>
     <%= form.label :bathroom %>
