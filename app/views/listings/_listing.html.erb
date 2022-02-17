@@ -20,8 +20,8 @@
 
         </div>
         <div>
-            <%= form_with url: "/listings/favorite", method: :post, :local => false, :remote => true do |form| %>
-                <%= form.check_box :favorite, { multiple: true, onchange: "this.form.submit()", checked: !@favorites.blank? && @favorites.include?(listing.id) }, true %>
+            <%= form_with url: "/listings/favorite", method: :post, :local => false, :remote => false do |form| %>
+                <%= form.check_box :favorite, { multiple: true, onclick: "this.form.submit()", checked: !@favorites.blank? && @favorites.include?(listing.id) }, true %>
                 <%= form.hidden_field :favorite_val, value: listing.id %>
             <% end %>
         </div>

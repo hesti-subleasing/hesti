@@ -7,11 +7,6 @@ class OrganizationsController < ApplicationController
       if !@user.is_admin
         redirect_to profile_path
       end
-      
-      # if @user.organization_id != params[:id].to_i
-      #   redirect_to root_path
-      #   return
-      # end
 
       # ppl who are part of the org
       @members = User.where(organization_id: @user.organization_id).pluck("username")
@@ -24,10 +19,9 @@ class OrganizationsController < ApplicationController
   def edit
     if session[:user_id]
       @user = User.find(session[:user_id])
-      if !@user.is_admin
+      if !@user.is_admin or @user.organization_id != params[:id]
         redirect_to profile_path
       end
-      
       @org = Organization.find(params[:id])
     else
       redirect_to login_path

@@ -1,15 +1,21 @@
 
 class ListingsController < ApplicationController
   def index
-    @listings = Listing.all
+    if session[:user_id]
+      user = User.find(session[:user_id])
+      @members = User.where(organization_id: user.organization_id)
+      @listings = Listing.where(user_id: @members)
+    else
+      @listings = Listing.all
+    end
     @amenities = Amenity.all
     @amenities_checked = []
     if check_filters
       str = filter.chomp(" AND ")
-      @listings = Listing.where(str)
+      @listings = Listing.where(user_id: @members).where(str)
       amenities = params[:amenitymapping].select { |amenity_id| amenity_id != "0" }
       if !amenities.blank?
-        listing_ids = Listing.where(str).pluck("id")
+        listing_ids = Listing.where(user_id: @members).where(str).pluck("id")
         @amenities_checked = Amenity.where(id: amenities).pluck("amenity_name")
         amenities_filtered = AmenityMapping.where(amenity_id: amenities).where(listing_id: listing_ids).group(:listing_id).count
         official = []
@@ -58,7 +64,12 @@ class ListingsController < ApplicationController
   end
 
   def show
+    user = User.find(session[:user_id])
+    members = User.where(organization_id: user.organization_id).pluck("id")
     @listing = Listing.find(params[:id])
+    if !members.include?(@listing.user_id)
+      redirect_to listings_path
+    end
     @amenity_ids = AmenityMapping.joins(:amenity).where(listing_id: @listing.id).pluck("amenity_id")
     @amenities = Amenity.where(id: @amenity_ids).pluck("amenity_name")
   end
@@ -120,7 +131,7 @@ class ListingsController < ApplicationController
       @filters["private_bathroom"] = params[:bathroom] == "Private" ? "true" : "false"
     end
 
-    @listings = Listing.all
+    # @listings = Listing.all
     str = ""
     @filters.each do |key, val|
       str.concat(key + " = " + val + " AND ")

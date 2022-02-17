@@ -12,3 +12,4 @@
 # end
 
 Organization.create(name: "TAMU", color: "#800000")
+Organization.create(name: "RICE", color: "#00205B")

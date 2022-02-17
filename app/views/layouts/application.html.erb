@@ -23,17 +23,17 @@
         <%= image_tag ("Logo_colored.png") %> 
       </div>
       <nav class="navMenu">
-        <a href="<%= root_path %>">Home</a>
-        <a href="<%= listings_path %>">Listings</a>
+        <%= link_to "Home", root_path %>
+        <%= link_to "Listings", listings_path %>
         <% if session[:user_id] %>
           <% if session[:admin] %>
-            <a href="<%= organization_path %>">Organization</a> 
+            <%= link_to "Organization", organization_path %>
           <% else %>
-            <a href="<%= profile_path %>">Profile</a>
+            <%= link_to "Profile", profile_path %>
           <% end %>
-          <a href="<%= logout_path %>">Logout</a> 
+            <%= link_to "Logout", logout_path %> 
         <% else %>
-          <a href="<%= login_path %>">Log In</a> 
+            <%= link_to "Log In", login_path %> 
         <% end %>
 
         <div class="dot"></div>
