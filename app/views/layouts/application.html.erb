@@ -11,19 +11,35 @@
   </head>
 
   <body>
+    <% if session[:user_id] && session[:org_color] %>
+      <style>
+        :root {
+          --nav-color: <%= session[:org_color].nil? ? "#FFFFFF" : session[:org_color] %>;
+        }
+      </style>
+    <% end %>
     <div class="navBar">
       <div class="logo-image">
         <%= image_tag ("Logo_colored.png") %> 
       </div>
       <nav class="navMenu">
-        <a href="#">Home</a>
-        <a href="#">Search</a>
-        <a href="#">Listings</a>
-        <a href="#">About</a> 
+        <%= link_to "Home", root_path %>
+        <%= link_to "Listings", listings_path %>
+        <% if session[:user_id] %>
+          <% if session[:admin] %>
+            <%= link_to "Organization", organization_path %>
+          <% else %>
+            <%= link_to "Profile", profile_path %>
+          <% end %>
+            <%= link_to "Logout", logout_path %> 
+        <% else %>
+            <%= link_to "Log In", login_path %> 
+        <% end %>
 
         <div class="dot"></div>
       </nav>
     </div>
     <%= yield %>
   </body>
+
 </html>

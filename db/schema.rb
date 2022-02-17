@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_28_212410) do
+ActiveRecord::Schema.define(version: 2022_02_15_200328) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -61,11 +61,16 @@ ActiveRecord::Schema.define(version: 2022_01_28_212410) do
     t.date "lease_end"
     t.float "rent"
     t.string "title"
+    t.string "image_file_name"
+    t.integer "image_file_size"
+    t.string "image_content_type"
+    t.datetime "image_updated_at"
     t.index ["user_id"], name: "index_listings_on_user_id"
   end
 
-  create_table "photos", force: :cascade do |t|
-    t.string "title"
+  create_table "organizations", force: :cascade do |t|
+    t.string "name"
+    t.string "color", default: "#ffffff"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -79,6 +84,8 @@ ActiveRecord::Schema.define(version: 2022_01_28_212410) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "username"
+    t.bigint "organization_id"
+    t.index ["organization_id"], name: "index_users_on_organization_id"
   end
 
   add_foreign_key "amenity_mappings", "amenities", on_delete: :cascade
@@ -86,4 +93,5 @@ ActiveRecord::Schema.define(version: 2022_01_28_212410) do
   add_foreign_key "favorites", "listings", on_delete: :cascade
   add_foreign_key "favorites", "users", on_delete: :cascade
   add_foreign_key "listings", "users", on_delete: :cascade
+  add_foreign_key "users", "organizations", on_delete: :cascade
 end

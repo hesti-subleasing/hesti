@@ -1,14 +1,19 @@
 
 class ListingsController < ApplicationController
   def index
+    if session[:user_id]
+      user = User.find(session[:user_id])
+      @members = User.where(organization_id: user.organization_id)
+      @listings = Listing.where(user_id: @members)
+    else
+      @listings = Listing.all
+    end
     @amenities = Amenity.all
     @amenities_checked = get_amenities_checked
     @search = params[:query]
     
     if check_filters
       @listings = filter
-    else
-      @listings = Listing.all
     end
 
     @favorites = []
@@ -48,7 +53,12 @@ class ListingsController < ApplicationController
   end
 
   def show
+    user = User.find(session[:user_id])
+    members = User.where(organization_id: user.organization_id).pluck("id")
     @listing = Listing.find(params[:id])
+    if !members.include?(@listing.user_id)
+      redirect_to listings_path
+    end
     @amenity_ids = AmenityMapping.joins(:amenity).where(listing_id: @listing.id).pluck("amenity_id")
     @amenities = Amenity.where(id: @amenity_ids).pluck("amenity_name")
   end
@@ -101,7 +111,13 @@ class ListingsController < ApplicationController
   end
 
   def filter
-    listings = Listing.all
+    if session[:user_id]
+      user = User.find(session[:user_id])
+      @members = User.where(organization_id: user.organization_id)
+      listings = Listing.where(user_id: @members)
+    else
+      listings = Listing.all
+    end
     
     amenities = params[:amenitymapping] ? params[:amenitymapping].select { |amenity_id| amenity_id != "0" } : []
 
