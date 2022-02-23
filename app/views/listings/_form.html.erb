@@ -86,5 +86,22 @@
         <br>
     <% end %>
     <br>
+    <div class="add-pic">
+        <div class="field">
+            <%= listing_form.label :title %>
+            <%= listing_form.text_field :title %>
+        </div>
+
+        <div class="field">
+            <%= listing_form.label :caption %>
+            <%= listing_form.text_area :title %>
+        </div>
+
+        <div class="field">
+            <%= listing_form.label :image %>
+            <%= listing_form.file_field :image %>
+        </div>
+    </div>
+    <br>
     <%= listing_form.submit button_label, class: "button" %> 
 <% end %>

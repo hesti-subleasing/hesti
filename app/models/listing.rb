@@ -1,6 +1,7 @@
 class Listing < ApplicationRecord
   belongs_to :user
-  validates :title, presence: true
+  # validates :title, presence: true
+
   validates :address_line_1, presence: true
   validates :city, presence: true
   validates :state, presence: true
@@ -8,6 +9,8 @@ class Listing < ApplicationRecord
   validates :rent, presence: true
   has_many :amenities, :through => :amenitymapping
   has_many :users, :through => :favorite
+  has_one_attached :image
+  # has_many_attached :images
 
   scope :filter_by_bedroom, -> (type) { where private_bedroom: type == "Private" ? true : false }
   scope :filter_by_bathroom, -> (type) { where private_bathroom: type == "Private" ? true : false }
