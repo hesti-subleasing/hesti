@@ -1,12 +1,10 @@
 <%= link_to listing_path(listing.id), target: :_blank, style: "text-decoration: none;" do %>
     <div style="display: grid; grid-template-columns: 30% 30% 10%; justify-content: center; justify-items: left; align-items: center;">
         
-        <%# <div style= "width: 60%; height: 60%; align: right">
-            <%= image_tag(@listing.image, style:'width:100%')%>
-        </div> 
-        %>
+        <% if listing.image %>
+            <div><%= image_tag(listing.image)%></div>
+        <% end %>
 
-        <div><%= image_tag ("bedroom.jpg"), style: "width: 60%; height: 60%", align: "right" %></div>
         <div style="color: white; margin-left: 20px">
             <h3><%= listing.title %></h3>
             <% if listing.apt_complex %>
