@@ -14,6 +14,8 @@ class Listing < ApplicationRecord
 
   scope :filter_by_bedroom, -> (type) { where private_bedroom: type == "Private" ? true : false }
   scope :filter_by_bathroom, -> (type) { where private_bathroom: type == "Private" ? true : false }
+  scope :filter_by_min_rent, -> (type) { where rent: type.. }
+  scope :filter_by_max_rent, -> (type) { where rent: ..type }
   scope :filter_by_query, -> (query) { where("description iLIKE ? or title iLIKE ?", "%#{query}%", "%#{query}%")}
 
   def self.filter_by_amenities(amenities)
