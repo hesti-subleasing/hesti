@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   
   get "login"  => "sessions#login", :as => "login"
   post "login"  => "sessions#create", :as => "login_post"
+  get "login_sso"  => "sessions#login_sso", :as => "login_sso"
   post "logout" => "sessions#destroy", :as => "logout_post"
   get "logout" => "sessions#destroy", :as => "logout"
   

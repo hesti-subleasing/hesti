@@ -33,3 +33,4 @@
 setup.sh
 test-setup.sh
 setup-storage.sh
+/config/master.key

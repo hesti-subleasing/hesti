@@ -6,7 +6,7 @@
 <h3>Last Name: <%= @user.last_name%></h3>
 <h3>Username: <%= @user.username%></h3>
 <h3>Email: <%= @user.email%></h3>
-<h3>Organization: <%= @org.name%></h3>
+<h3>Organization: <%= @org ? @org.name : 'None' %></h3>
 
 <%= button_to "Edit Account", edit_user_path, method: :get, class: "button" %>
 <%= button_to "Deactivate my Account", deactivate_path, method: :delete, class: "button" %>

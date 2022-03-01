@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  include SessionsConcern
   helper_method :errors_for
 
   def index
@@ -15,7 +16,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save and (user_params[:password] == user_params[:password_confirmation])
-      session[:user_id] = @user.id
+      set_session_params(@user)
       redirect_to listings_path
     else
       if user_params[:password] != user_params[:password_confirmation]
@@ -36,7 +37,9 @@ class UsersController < ApplicationController
         redirect_to organization_path
       end
       
-      @org = Organization.find(@user.organization_id)
+      if @user.organization_id
+        @org = Organization.find(@user.organization_id)
+      end
 
       @listings = Listing.where(user_id: id)
       # count who favorited
@@ -63,17 +66,15 @@ class UsersController < ApplicationController
 
   def update
     # update a user
-    # @movie = Movie.find params[:id]
-    # @movie.update!(movie_params)
-    # flash[:notice] = "#{@movie.title} was successfully updated."
     if session[:user_id]
       @user = User.find(session[:user_id])
       params["user"].each do |key, val|
         unless val.empty?
           @user.update_attribute(key, val)
         end
+        
+        set_session_params(@user)
       end
-      # @user.update!(user_params)
     end
     redirect_to profile_path
   end
@@ -83,9 +84,7 @@ class UsersController < ApplicationController
     if session[:user_id]
       @user = User.find(session[:user_id])
       @user.destroy
-      session.delete(:user_id)
-      session.delete(:admin)
-      session.delete(:org_color)
+      clear_session_params
     end
     redirect_to root_path
   end
