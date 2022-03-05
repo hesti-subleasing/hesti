@@ -1,8 +1,11 @@
 <%= link_to listing_path(listing.id), target: :_blank, style: "text-decoration: none;" do %>
     <div style="display: grid; grid-template-columns: 30% 30% 10%; justify-content: center; justify-items: left; align-items: center;">
         
-        <% if listing.image %>
+        <% if listing.image.attached? %>
             <div><%= image_tag(listing.image)%></div>
+        <% else %>
+            <div><img src="https://images.unsplash.com/photo-1543393470-b2c833b98dce?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8aGVhcnRofGVufDB8fDB8fA%3D%3D&w=1000&q=80">
+</div>
         <% end %>
 
         <div style="color: white; margin-left: 20px">
