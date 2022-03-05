@@ -16,6 +16,7 @@
               <%= button_to "Profile", profile_path, method: :get, class: "button" %>
               <%= button_to "Log out", logout_path, method: :get, class: "button" %>
             <% else %>
+              <%= google_sign_in_button 'Sign in with my Google account', data: {turbo: "false"},  proceed_to: login_sso_path %>
               <%= button_to "Sign up", signup_path, method: :get, class: "button" %>
               <%= button_to "Log in", login_path, method: :get, class: "button" %>
             <% end %>

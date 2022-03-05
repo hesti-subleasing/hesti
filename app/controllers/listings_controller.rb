@@ -11,6 +11,8 @@ class ListingsController < ApplicationController
     @amenities = Amenity.all
     @amenities_checked = get_amenities_checked
     @search = params[:query]
+    @min_rent = params[:min_rent]
+    @max_rent = params[:max_rent]
     
     if check_filters
       @listings = filter
@@ -108,7 +110,7 @@ class ListingsController < ApplicationController
   end
 
   def check_filters
-    return (!params[:bedroom].blank? or !params[:bathroom].blank? or !params[:amenitymapping].blank? or !params[:query].blank?)
+    return (!params[:bedroom].blank? or !params[:bathroom].blank? or !params[:amenitymapping].blank? or !params[:query].blank? or !params[:min_rent].blank? or !params[:max_rent].blank?)
   end
 
   def filter
@@ -124,6 +126,8 @@ class ListingsController < ApplicationController
 
     listings = listings.filter_by_bedroom(params[:bedroom]) if params[:bedroom].present?
     listings = listings.filter_by_bathroom(params[:bathroom]) if params[:bathroom].present?
+    listings = listings.filter_by_min_rent(params[:min_rent]) if params[:min_rent].present?
+    listings = listings.filter_by_max_rent(params[:max_rent]) if params[:max_rent].present?
     listings = listings.filter_by_query(params[:query]) if params[:query].present?
     listings = listings.filter_by_amenities(amenities) if amenities.present?
 

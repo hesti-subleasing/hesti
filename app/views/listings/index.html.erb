@@ -8,6 +8,10 @@
     <%= select_tag :bedroom, options_for_select(["","Private", "Shared"], params[:bedroom]), onchange: "this.form.submit()" %>
     <%= form.label :bathroom %>
     <%= select_tag :bathroom, options_for_select(["","Private", "Shared"], params[:bathroom]), onchange: "this.form.submit()" %>
+    <%= form.label :range %>
+    <%= form.number_field :min_rent, step: 1, onchange: "this.form.submit()", value: @min_rent %>
+    &#8212;
+    <%= form.number_field :max_rent, step: 1, onchange: "this.form.submit()", value: @max_rent %>
     <%= form.label :amenities %>
     <% @amenities.each do |amenity| %>
         <%= form.check_box :amenitymapping, { multiple: true, onchange: "this.form.submit()", checked: !@amenities_checked.blank? && @amenities_checked.include?(amenity.amenity_name) }, amenity.id %>

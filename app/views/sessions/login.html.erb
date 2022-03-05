@@ -9,6 +9,7 @@
       </div>
     <% end %>
 
+    <%= google_sign_in_button 'Sign in with my Google account', data: {turbo: "false"},  proceed_to: login_sso_path %>
     <%= form_with url: "/login", class: "login-form" do |form| %>
       <i class="fas fa-user-circle"></i>
       <%= form.email_field :email, class:"user-input", placeholder: "Email", :required => true %>
