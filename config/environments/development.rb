@@ -59,6 +59,13 @@ Rails.application.configure do
   # Suppress logger output for asset requests.
   config.assets.quiet = true
 
+   #configures Rails itself to serve static assets. 
+  #Defaults to true, but in the production environment is turned off 
+  config.serve_static_assets = true
+
+  # Store files locally.
+  config.active_storage.service = :local
+
   # Raises error for missing translations.
   # config.i18n.raise_on_missing_translations = true
 

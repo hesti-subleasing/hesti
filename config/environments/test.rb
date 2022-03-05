@@ -55,6 +55,10 @@ Rails.application.configure do
   # Raises error for missing translations.
   # config.i18n.raise_on_missing_translations = true
 
+  #configures Rails itself to serve static assets. 
+  #Defaults to true, but in the production environment is turned off 
+  config.serve_static_assets = true
+
   # Annotate rendered view with file names.
   # config.action_view.annotate_rendered_view_with_filenames = true
 end

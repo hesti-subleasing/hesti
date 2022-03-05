@@ -35,6 +35,7 @@ class ListingsController < ApplicationController
 
   def create
     @listing = Listing.new(listing_params)
+    @listing.image.attach(params[:image])
     
     if @listing.save 
       if amenity_params.has_key?("amenitymapping")
