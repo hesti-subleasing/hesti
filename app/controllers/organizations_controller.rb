@@ -19,7 +19,8 @@ class OrganizationsController < ApplicationController
   def edit
     if session[:user_id]
       @user = User.find(session[:user_id])
-      if !@user.is_admin or @user.organization_id != params[:id]
+      p @user
+      if !@user.is_admin and @user.organization_id != params[:id]
         redirect_to profile_path
       end
       @org = Organization.find(params[:id])
