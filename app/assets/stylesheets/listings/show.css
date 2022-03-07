@@ -21,3 +21,9 @@ img {
     width: 50%;
     height: 30%;
 }
+
+.imageGallery {
+    background-color: black;
+    display: flex;
+    align-items: center;
+}
