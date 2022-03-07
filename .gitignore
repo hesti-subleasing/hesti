@@ -33,4 +33,5 @@
 setup.sh
 test-setup.sh
 setup-storage.sh
+setup-google.sh
 /config/master.key
