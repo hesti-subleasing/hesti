@@ -49,6 +49,12 @@ class UsersController < ApplicationController
 
       favoriteIDs = Favorite.where(user_id: id).pluck("listing_id")
       @favorites = Listing.find(favoriteIDs)
+
+      requested_listings = Request.where(user_id: id).pluck("listing_id")
+      @requests = Listing.find(requested_listings)
+      request_arr = Request.where(user_id: id).joins(:listing).pluck("listing_id", "id")
+      @request_map = request_arr.to_h { |req| [req[0], req[1]] }
+      # p potato
     else
       redirect_to login_path
     end

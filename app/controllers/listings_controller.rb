@@ -59,6 +59,13 @@ class ListingsController < ApplicationController
     user = User.find(session[:user_id])
     members = User.where(organization_id: user.organization_id).pluck("id")
     @listing = Listing.find(params[:id])
+    requested_listing = Request.where(user_id: session[:user_id], listing_id: params[:id])
+    # p requested_listing
+    if requested_listing.blank?
+      @requested = false
+    else
+      @requested = true
+    end
     if !members.include?(@listing.user_id)
       redirect_to listings_path
     end
@@ -166,6 +173,32 @@ class ListingsController < ApplicationController
         Favorite.destroy_by(user_id: session[:user_id], listing_id: params[:favorite_val])
         redirect_to profile_path
       end
+    end
+  end
+
+  def request_listing
+    puts "here"
+    @requested_listing = Request.new({user_id: session[:user_id], listing_id: params[:requested_listing]})
+    if @requested_listing.save
+      puts "savved"
+    end  
+    redirect_back(fallback_location: root_path)
+  end
+  
+  def cancel_request
+    # puts "hereeee"
+    Request.destroy_by(user_id: session[:user_id], listing_id: params[:requested_listing])
+    redirect_back(fallback_location: root_path)
+    # redirect_to listing_path(params[:requested_listing])
+  end
+
+  def pending_requests
+    listing = Listing.find(params[:id])
+    if session[:user_id] == listing.user_id
+      # requests returns an array of [request_ids, emails of requesters]
+      @requests = Request.where(listing_id: params[:id]).joins(:user).pluck("id", "username", "email")
+    else
+      redirect_to profile_path
     end
   end
 end
