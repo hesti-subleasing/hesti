@@ -1,16 +1,17 @@
-<h1>Organizations#organization</h1>
+<h1 style="margin-bottom: 10px">Organization Profile</h1>
 
-<h3>ADMIN of <%= @org.name %></h3>
+<div class="profile">
+    <div class="profile-info">
+        <h4>ADMIN of <%= @org.name %></h4>
+        <h4>Organization Name: <%= @org.name%> </h4>
+        <h4>Background Color: <br/> <span style="background-color: <%= @org.color%>">&emsp;</span> <%=@org.color%> </h4>
+    </div>
+    <div class="profile-options">
+        <%= button_to "Edit Account", edit_user_path, method: :get, class: "button" %>
+        <%= button_to "Edit Organization Settings", edit_org_path(@org), method: :get, class: "button" %>
+        <%= button_to "Deactivate my Account", deactivate_path, method: :delete, class: "button", data: { confirm: "Are you sure?" } %>
+    </div>
+</div>
 
-<%= button_to "Edit Account", edit_user_path, method: :get, class: "button" %>
-<%= button_to "Edit Organization Settings", edit_org_path(@org), method: :get, class: "button" %>
-<%= button_to "Deactivate my Account", deactivate_path, method: :delete, class: "button", data: { confirm: "Are you sure?" } %>
 
-<h3>Current Settings:</h3>
-<h3>Organization Name: <%= @org.name%> </h3>
-<h3>Background Color: <span style="background-color: <%= @org.color%>">&emsp;</span> <%=@org.color%> </h3>
-
-<h3>Users associated with this organization:</h3>
-<% @members.each do |user|%>
-    <ul><%=user%></ul>
-<% end %>
+<%= button_to "Users in Organization", organization_users_path, method: :get, class: "button" %>

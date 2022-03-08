@@ -32,7 +32,7 @@ h1 {
  
 .navBar {
   height: calc(3em + 15px);
-  width:100vw;
+  width:100%;
   background-color: var(--nav-color);
   position: absolute;
   top:0;
@@ -43,8 +43,13 @@ h1 {
   max-width:50px;
   border-radius: 50%;
   overflow: hidden;
-  padding: 10px;
-  margin-top: -6px;
+  height: 100%;
+  padding: 0;
+  padding-left: 10px;
+}
+
+.logo-image img {
+  height: 100%;
 }
   
 .navMenu {
