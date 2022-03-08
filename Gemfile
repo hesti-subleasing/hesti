@@ -45,6 +45,9 @@ gem "bootsnap", require: false
 # Google SSO
 gem "google_sign_in"
 
+#front-end
+gem 'bootstrap', '~> 5.1.3'
+
 # Use Sass to process CSS
 # gem "sassc-rails"
 

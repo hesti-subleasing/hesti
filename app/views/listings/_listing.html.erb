@@ -2,7 +2,6 @@
     <div style="display: grid; grid-template-columns: 30% 30% 10%; justify-content: center; justify-items: left; align-items: center;">
         
         <% if listing.images.attached? %>
-            <%# <div><%= image_tag(listing.images)%></div> %>
             <% listing.images.each do |image| %>
                 <%= image_tag(image) %>
             <% end %>
