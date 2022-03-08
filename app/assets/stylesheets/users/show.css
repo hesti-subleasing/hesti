@@ -1,0 +1,32 @@
+h2 {
+    color: #c28e71;
+}
+
+h4 {
+    color: #c28e71;
+    margin: 10px;
+}
+
+.profile {
+	background-color: white;
+	border-radius: 10px;
+	display: flex;
+	max-width: 100%;
+	margin: 20px;
+	overflow: hidden;
+	width: 700px;
+}
+
+
+.profile-info {
+	color: #fff;
+	padding: 30px;
+    width: 70%;
+}
+
+
+.profile-options {
+	padding: 30px;
+	position: relative;
+	width: 100%;
+}
