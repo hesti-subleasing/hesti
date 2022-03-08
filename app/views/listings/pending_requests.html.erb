@@ -1,0 +1,26 @@
+<h1>Pending Requests</h1>
+<h2>
+    These are the users who have requested to sublease your listing.
+    <br>
+    For identification and safety purposes, we ask that you include the Request ID in your email to them.
+</h2>
+
+
+<% if @requests.blank? %>
+    <h2>No pending requests</h2>
+<% else %>
+    <table>
+        <tr>
+            <th>Request ID</th>
+            <th>Username</th>
+            <th>Email</th>
+        </tr>
+        <% @requests.each do |request| %>
+            <tr>
+                <td><%= request[0] %></td>
+                <td><%= request[1] %></td>
+                <td><%= request[2] %></td>
+            </tr>
+        <% end %>
+    </table>    
+<% end %>

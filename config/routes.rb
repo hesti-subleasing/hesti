@@ -19,6 +19,9 @@ Rails.application.routes.draw do
   resources :listings
   
   post "listings/favorite" => "listings#favorite", :as => "favorite"
+  post "listings/request_listing" => "listings#request_listing", :as => "request_listing"
+  post "listings/cancel_request" => "listings#cancel_request", :as => "cancel_request"
+  get "listings/:id/pending_requests" => "listings#pending_requests", :as => "pending_requests"
   
   get "organization" => "organizations#organization", :as => "organization"
   get "organizations/:id/edit" => "organizations#edit", :as => "edit_org"

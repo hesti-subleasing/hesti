@@ -1,6 +1,7 @@
 class User < ApplicationRecord
     has_many :listings
     has_many :listings, :through => :favorite
+    has_many :listings, :through => :request
     # belongs_to :organization
     validates :first_name, presence: true
     validates :last_name, presence: true
