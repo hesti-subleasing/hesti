@@ -46,6 +46,11 @@ h1 {
   padding: 10px;
   margin-top: -6px;
 }
+
+.logo-image img {
+  width: 60%;
+  height: 60%;
+}
   
 .navMenu {
   position: absolute;
