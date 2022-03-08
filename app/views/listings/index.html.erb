@@ -1,4 +1,4 @@
-<h1>Listings</h1>
+<h1 style="margin-bottom: 10px">Listings</h1>
 <%# <p>Find me in app/views/listings/index.html.erb</p> %>
 <%= form_with url: listings_path, method: :get do |form| %>
     <%= form.label :query %>
@@ -12,6 +12,7 @@
     <%= form.number_field :min_rent, step: 1, onchange: "this.form.submit()", value: @min_rent %>
     &#8212;
     <%= form.number_field :max_rent, step: 1, onchange: "this.form.submit()", value: @max_rent %>
+    <br>
     <%= form.label :amenities %>
     <% @amenities.each do |amenity| %>
         <%= form.check_box :amenitymapping, { multiple: true, onchange: "this.form.submit()", checked: !@amenities_checked.blank? && @amenities_checked.include?(amenity.amenity_name) }, amenity.id %>

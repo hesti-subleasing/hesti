@@ -1,22 +1,28 @@
-<h1>Users#show</h1>
-<p>Find me in app/views/users/show.html.erb</p>
+<%# <h1>Users#show</h1>
+<p>Find me in app/views/users/show.html.erb</p> %>
 
-<h3>User Profile</h3>
-<h3>First Name: <%= @user.first_name%></h3>
-<h3>Last Name: <%= @user.last_name%></h3>
-<h3>Username: <%= @user.username%></h3>
-<h3>Email: <%= @user.email%></h3>
-<h3>Organization: <%= @org ? @org.name : 'None' %></h3>
+<h1 style="margin-bottom: 10px">User Profile</h1>
+<div class="profile">
+    <div class="profile-info">
+        <h4>First Name: <%= @user.first_name%></h4>
+        <h4>Last Name: <%= @user.last_name%></h4>
+        <h4>Username: <%= @user.username%></h4>
+        <h4>Email: <%= @user.email%></h4>
+        <h4>Organization: <%= @org ? @org.name : 'None' %></h4>
+    </div>
+    <div class="profile-options">
+        <%= button_to "Edit Account", edit_user_path, method: :get, class: "button" %>
+        <%= button_to "Deactivate my Account", deactivate_path, method: :delete, class: "button" %>
+        <%= button_to "Create Listing", new_listing_path, method: :get, class: "button" %>
+    </div>
+</div>
 
-<%= button_to "Edit Account", edit_user_path, method: :get, class: "button" %>
-<%= button_to "Deactivate my Account", deactivate_path, method: :delete, class: "button" %>
-<%= button_to "Create Listing", new_listing_path, method: :get, class: "button" %>
 
-<h3>My Listings</h3>
+<h2>My Listings</h2>
 <%= render partial: "listing", collection: @listings, locals: {favorited_by: @favorited_by, favorite_option: false, request_option: false } %>
 
-<h3>My Favorites</h3>
+<h2>My Favorites</h2>
 <%= render partial: "listing", collection: @favorites, locals: {favorited_by: [], favorite_option: true, request_option: false } %>
 
-<h3>My Requests</h3>
+<h2>My Requests</h2>
 <%= render partial: "listing", collection: @requests, locals: {favorited_by: [], favorite_option: false, request_option: true } %>
