@@ -12,9 +12,9 @@
             <h6>
                 <% if !listing.apt_complex.empty? %>
                     <%= listing.apt_complex %>
-                    &sdot;
                 <% end %>
-                
+            </h6>
+            <h6>                
                 <% if !listing.rent.blank? %>
                     $<%= number_with_precision(listing.rent, precision: 2,  strip_insignificant_zeros: true) %>/month
                     &sdot;
@@ -22,6 +22,12 @@
 
                 <% if !listing.num_bedrooms.blank? && !listing.num_bathrooms.blank? %>
                     <%= listing.num_bedrooms %> BD X <%= listing.num_bathrooms %> BA
+                <% end %>
+            </h6>
+            <h6>
+                <% if !listing.lease_start.blank? && !listing.lease_end.blank? %>
+                    <%= listing.lease_start.strftime('%m-%d-%Y') %> to 
+                    <%= listing.lease_end.strftime('%m-%d-%Y') %>
                 <% end %>
             </h6>
             <% if listing.user_id == session[:user_id] %>

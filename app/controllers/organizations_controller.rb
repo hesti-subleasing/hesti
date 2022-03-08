@@ -8,8 +8,6 @@ class OrganizationsController < ApplicationController
         redirect_to profile_path
       end
 
-      # ppl who are part of the org
-      @members = User.where(organization_id: @user.organization_id).pluck("username")
       @org = Organization.find(@user.organization_id)
     else
       redirect_to login_path
@@ -35,6 +33,22 @@ class OrganizationsController < ApplicationController
     @org.update!(org_params)
     session[:org_color] = @org.color
     redirect_to organization_path
+  end
+
+  def users
+    if session[:user_id]
+      id = session[:user_id]
+      @user = User.find(id)
+      if !@user.is_admin
+        redirect_to profile_path
+      end
+
+      # ppl who are part of the org
+      @members = User.where(organization_id: @user.organization_id).order("id").pluck("id", "first_name", "last_name", "username", "email")
+      @org = Organization.find(@user.organization_id)
+    else
+      redirect_to login_path
+    end
   end
 
   def org_params

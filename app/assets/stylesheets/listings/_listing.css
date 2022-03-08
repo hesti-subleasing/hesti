@@ -7,7 +7,7 @@ body {
 	align-items: center;
 	justify-content: center;
 	flex-direction: column;
-	min-height: 100vh;
+	/* min-height: 100vh; */
 	margin: 0;
 }
 
@@ -25,7 +25,8 @@ body {
 	opacity: 0.6;
 	margin: 0;
 	letter-spacing: 1px;
-	text-transform: uppercase;
+	/* text-transform: uppercase; */
+	font-size: 18px;
     /* color: grey; */
 }
 
@@ -33,12 +34,14 @@ body {
     color: #c28e71;
 	letter-spacing: 1px;
 	margin: 10px 0;
+	font-size: 27px;
 }
 
 .listing-preview {
 	color: #fff;
 	padding: 30px;
 	max-width: 250px;
+	align-self: center;
 }
 
 .listing-preview a {
