@@ -35,7 +35,9 @@ class ListingsController < ApplicationController
 
   def create
     @listing = Listing.new(listing_params)
-    @listing.image.attach(params[:image])
+    params[:listing][:images].each do |image| 
+      @listing.images.attach(image)
+    end 
     
     if @listing.save 
       if amenity_params.has_key?("amenitymapping")
@@ -59,6 +61,7 @@ class ListingsController < ApplicationController
     user = User.find(session[:user_id])
     members = User.where(organization_id: user.organization_id).pluck("id")
     @listing = Listing.find(params[:id])
+    @listing = Listing.with_attached_images.find(params[:id])
     requested_listing = Request.where(user_id: session[:user_id], listing_id: params[:id])
     # p requested_listing
     if requested_listing.blank?
@@ -92,6 +95,12 @@ class ListingsController < ApplicationController
       #   end
       # end
       @listing.update!(listing_params)
+
+      if listing_params[:images].present?
+        listing_params[:images].each do |image|
+          @listing.images.attach(image)
+        end
+      end
       if amenity_params.has_key?("amenitymapping")
         for amenity in amenity_params["amenitymapping"]
           @amenity_mapping = AmenityMapping.create(listing_id: @listing.id, amenity_id: amenity)
@@ -147,7 +156,7 @@ class ListingsController < ApplicationController
 
   def listing_params
     list_params = params.require(:listing)
-                        .permit(:title, :address_line_1, :address_line_2, :city, :state, :zip_code, :apt_complex, :rent, :lease_start, :lease_end, :private_bedroom, :private_bathroom, :num_roommates, :num_bedrooms, :num_bathrooms, :num_pets, :description, :user_id, :image)
+                        .permit(:title, :address_line_1, :address_line_2, :city, :state, :zip_code, :apt_complex, :rent, :lease_start, :lease_end, :private_bedroom, :private_bathroom, :num_roommates, :num_bedrooms, :num_bathrooms, :num_pets, :description, :user_id)
                         .with_defaults(user_id: session[:user_id])
     return list_params
   end

@@ -1,6 +1,8 @@
-<h1 class= "login_txt", style="position: absolute;top: 0;">Login</h1>
-<body class="login">
-
+<body>
+  <h1 class= "login_txt">Login</h1>
+  <div>
+    <%= google_sign_in_button 'Sign in with my Google account', data: {turbo: "false"},  proceed_to: login_sso_path, class: "button" %>
+  </div>
   <div class="form">
 
     <% if flash[:error] %>
@@ -9,7 +11,6 @@
       </div>
     <% end %>
 
-    <%= google_sign_in_button 'Sign in with my Google account', data: {turbo: "false"},  proceed_to: login_sso_path %>
     <%= form_with url: "/login", class: "login-form" do |form| %>
       <i class="fas fa-user-circle"></i>
       <%= form.email_field :email, class:"user-input", placeholder: "Email", :required => true %>

@@ -9,8 +9,17 @@ class Listing < ApplicationRecord
   validates :rent, presence: true
   has_many :amenities, :through => :amenitymapping
   has_many :users, :through => :favorite
-  has_one_attached :image
-  # has_many_attached :images
+  # has_one_attached :image
+  has_many_attached :images
+
+  attr_accessor :new_images
+
+  # def attach_images
+  #   return if new_images.blank?
+
+  #   images.attach(new_images)
+  #   self.new_images = []
+  # end
 
   scope :filter_by_bedroom, -> (type) { where private_bedroom: type == "Private" ? true : false }
   scope :filter_by_bathroom, -> (type) { where private_bathroom: type == "Private" ? true : false }

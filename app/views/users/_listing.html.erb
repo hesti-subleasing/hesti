@@ -1,36 +1,51 @@
 <%= link_to listing_path(listing.id), target: :_blank, style: "text-decoration: none;" do %>
-    <div style="display: grid; grid-template-columns: 40% 40%; justify-content: center; justify-items: center; align-items: center;">
-        <div><%= image_tag ("bedroom.jpg"), style: "width: 100%; height: 100%;" %></div>
-        <div style="color: white">
+    <div class="listing">
+        <div class="listing-preview">
+            <% if listing.image.attached? %>
+                <%= image_tag(listing.image)%>
+            <% else %>
+                <img src="https://images.unsplash.com/photo-1543393470-b2c833b98dce?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8aGVhcnRofGVufDB8fDB8fA%3D%3D&w=1000&q=80">
+            <% end %>
+        </div>
+        <div style="listing-info">
             <h3><%= listing.title %></h3>
-            <% if listing.apt_complex %>
-                <%= listing.apt_complex %>
-                &sdot;
-            <% end %>
-            
-            <% if listing.rent %>
-                $<%= number_with_precision(listing.rent, precision: 2,  strip_insignificant_zeros: true) %>/month
-                &sdot;
-            <% end %>
+            <h6>
+                <% if !listing.apt_complex.empty? %>
+                    <%= listing.apt_complex %>
+                <% end %>
+            </h6>
+            <h6>                
+                <% if !listing.rent.blank? %>
+                    $<%= number_with_precision(listing.rent, precision: 2,  strip_insignificant_zeros: true) %>/month
+                    &sdot;
+                <% end %>
 
-            <% if listing.num_bedrooms && listing.num_bathrooms %>
-                <%= listing.num_bedrooms %> Bd X <%= listing.num_bathrooms %> Bth
-                &sdot;
-            <% end %>
+                <% if !listing.num_bedrooms.blank? && !listing.num_bathrooms.blank? %>
+                    <%= listing.num_bedrooms %> BD X <%= listing.num_bathrooms %> BA
+                <% end %>
+            </h6>
+            <h6>
+                <% if !listing.lease_start.blank? && !listing.lease_end.blank? %>
+                    <%= listing.lease_start.strftime('%m-%d-%Y') %> to 
+                    <%= listing.lease_end.strftime('%m-%d-%Y') %>
+                <% end %>
+            </h6>
             <% if listing.user_id == session[:user_id] %>
                 <%= button_to "Edit Listing", edit_listing_path(listing.id), method: :get, class: "button" %>
                 <%= button_to "Delete Listing", listing_path(listing.id), method: :delete, data: { confirm: "Are you sure?" }, class: "button" %>
                 <%= button_to "Pending Requests", pending_requests_path(listing.id), method: :get, class: "button" %>
                 <% if favorited_by.is_a?(Hash) %>
-                    <p>Number of users who have favorited this listing:</p><%= favorited_by[listing.id] ? favorited_by[listing.id] : "0" %>
+                    <h4>Number of users who have favorited this listing: <%= favorited_by[listing.id] ? favorited_by[listing.id] : "0" %></h4>
                 <% end %>
             <% end %>
 
             <% if favorite_option %>
-                <%= form_with url: "/listings/favorite", method: :post do |form| %>
-                    <%= form.hidden_field :favorite_val, value: listing.id %>
-                    <%= form.submit "Remove Favorite", name: "favorite", class: "button" %>
-                <% end %>
+                <div class="favorite-button">
+                    <%= form_with url: "/listings/favorite", method: :post do |form| %>
+                        <%= form.hidden_field :favorite_val, value: listing.id %>
+                        <%= form.submit "Remove Favorite", name: "favorite", class: "button" %>
+                    <% end %>
+                </div>
             <% elsif request_option %>
                 <h4> Request ID: <%= @request_map[listing.id] %> </h4>
                 <%= form_with url: "/listings/cancel_request", method: :post do |form| %>

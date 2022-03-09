@@ -26,6 +26,7 @@ Rails.application.routes.draw do
   get "organization" => "organizations#organization", :as => "organization"
   get "organizations/:id/edit" => "organizations#edit", :as => "edit_org"
   put "organizations/:id" => "organizations#update", :as => "update_org"
+  get "organization/users" => "organizations#users", :as => "organization_users"
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
