@@ -38,8 +38,8 @@
     <div class="listing-summary">
         <h3><%= @listing.apt_complex unless @listing.apt_complex.blank? %></h3>
         <div>
-            <li><%= @listing.private_bedroom ? "Private Bedroom " : "Shared Bedroom"%>• </li>
-            <li><%= @listing.private_bathroom ? "Private Bathroom " : "Shared Bathroom"%>• </li>
+            <li><%= @listing.private_bedroom ? "Private Bedroom " : "Shared Bedroom "%>• </li>
+            <li><%= @listing.private_bathroom ? "Private Bathroom " : "Shared Bathroom "%>• </li>
             <li><%= @listing.num_bedrooms %> BD x <%= @listing.num_bathrooms %> BA </li>
             <br/>
             <li>Rent: $<%= number_with_precision(@listing.rent, precision: 2,  strip_insignificant_zeros: true) %>/month</li>
