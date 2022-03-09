@@ -12,3 +12,8 @@ Background: accounts in database
     | test              | ing       | user2        | test@tamu.edu  | testing  | 2  |
 
 Scenario: Create listing without required fields
+    Given I am logged in as user
+    And I am on the new listing page
+    When I fill out the listing form
+    And I click "Submit"
+    Then I should be on the listing details page for id 1

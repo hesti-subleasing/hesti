@@ -5,6 +5,8 @@ require 'capybara/cucumber'
 require 'capybara/session'
 require File.expand_path(File.join(File.dirname(__FILE__), "..", "support", "paths"))
 
+# require SessionsConcern
+
 module WithinHelpers
   def with_scope(locator)
     locator ? within(locator) { yield } : yield
@@ -33,6 +35,15 @@ end
 
 Given /^I am on (.+)$/ do |page_name|
   visit path_to(page_name)
+end
+
+Given /^I am logged in as (.+)$/ do |username|
+  user = User.where(username: user).first
+  if user
+    set_session_params(user)
+  else
+    p "errorr"
+  end
 end
 
 Then /^I should be on (.+)$/ do |page_name|
@@ -87,20 +98,40 @@ When /^I fill out the login form(?: with(?: email="([^,]*)",?)?(?: password="([^
   fill_in("password", :with => password)
 end
 
-When /^I fill out the listing form(?: with(?: title="([^,]*)",?)?(?: address_1="([^,]*)",?)?(?: address_2="([^,]*)",?)?(?: city="([^,]*)",?)?(?: state="([^,]*)",?)?(?: zip_code="([^,]*)",?)?(?: apt="([^,]*)",?)?(?: rent="([^,]*)",?)?(?: private_bed="([^,]*)",?)?(?: private_bath="([^,]*)",?)?(?: roommates="([^,]*)",?)?(?: num_beds="([^,]*)",?)?(?: pets="([^,]*)",?)?(?: description="([^,]*)",?)?)?$/ do |title, address_1, address_2, city, state, zip_code, apt, rent, private_bed, private_bath, roommates, num_beds, num_baths, pets, description|
-  title ||= "TestFirst"
-  last ||= "TestLast"
-  username ||= "user"
-  email ||= "test@tamu.edu"
-  password ||= "pass"
-  password_confimation ||= password
+When /^I fill out the listing form(?: with(?: title="([^,]*)",?)?(?: address_1="([^,]*)",?)?(?: address_2="([^,]*)",?)?(?: city="([^,]*)",?)?(?: state="([^,]*)",?)?(?: zip_code="([^,]*)",?)?(?: apt="([^,]*)",?)?(?: rent="([^,]*)",?)?(?: private_bed="([^,]*)",?)?(?: private_bath="([^,]*)",?)?(?: roommates="([^,]*)",?)?(?: beds="([^,]*)",?)?(?: baths="([^,]*)",?)?(?: pets="([^,]*)",?)?(?: description="([^,]*)",?)?)?$/ do |title, address_1, address_2, city, state, zip_code, apt, rent, private_bed, private_bath, roommates, beds, baths, pets, description|
+  title ||= "Test Title"
+  address_1 ||= "1234"
+  address_2 ||= ""
+  city ||= "TestCity"
+  state ||= "Test"
+  zip_code ||= "12345"
+  apt ||= "TestApt"
+  rent ||= 1000
+  private_bed ||= "true"
+  private_bed = private_bed.downcase == "true" ? true : false
+  private_bath ||= "false"
+  private_bath = private_bath.downcase == "true" ? true : false
+  roommates ||= 4
+  beds ||= 4
+  baths ||= 4
+  pets ||= 4
+  description ||= "sdjflsjdfklsjdxf"
 
-  fill_in("user_first_name", :with => first)
-  fill_in("user_last_name", :with => last)
-  fill_in("user_username", :with => username)
-  fill_in("user_email", :with => email)
-  fill_in("user_password", :with => password)
-  fill_in("user_password_confirmation", :with => password_confimation)
+  fill_in("listing_title", :with => title)
+  fill_in("listing_address_line_1", :with => address_1)
+  fill_in("listing_address_line_2", :with => address_2)
+  fill_in("listing_city", :with => city)
+  fill_in("listing_state", :with => state)
+  fill_in("listing_zip_code", :with => zip_code)
+  fill_in("listing_apt_complex", :with => apt)
+  fill_in("listing_rent", :with => rent)
+  fill_in("listing_private_bedroom", :with => private_bed)
+  fill_in("listing_private_bathroom", :with => private_bath)
+  fill_in("listing_num_roommates", :with => roommates)
+  fill_in("listing_num_beds", :with => beds)
+  fill_in("listing_num_baths", :with => baths)
+  fill_in("listing_num_pets", :with => pets)
+  fill_in("listing_description", :with => description)
 end
 
 And /^I click "([^\"]+)"$/ do |button|
