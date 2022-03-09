@@ -104,5 +104,6 @@ body {
 .favorite-button input[type="checkbox"]:checked,
 .favorite-button input:checked[type="checkbox"]:before,
 .favorite-button input:checked[type="checkbox"]:after {
-    background-color: #c27971;
+    /* background-color: #c27971; */
+    background-color: #d05a59;
 }

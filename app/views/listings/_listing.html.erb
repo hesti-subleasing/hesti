@@ -18,7 +18,7 @@
             <h6>                
                 <% if !listing.rent.blank? %>
                     $<%= number_with_precision(listing.rent, precision: 2,  strip_insignificant_zeros: true) %>/month
-                    &sdot;
+                    •
                 <% end %>
 
                 <% if !listing.num_bedrooms.blank? && !listing.num_bathrooms.blank? %>
