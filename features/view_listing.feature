@@ -17,6 +17,7 @@ Background: listings in database
 
 
 Scenario: I view listing details
-	Given I am on the listing details page for id 1
+	Given I am logged in as user
+    And I am on the listing details page for id 1
 	Then I should see "listing1"
 	And I should see "1000"
