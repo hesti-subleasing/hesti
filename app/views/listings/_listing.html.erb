@@ -1,13 +1,16 @@
+<head>
+    <%= stylesheet_link_tag "listings/_listing", media: "all", "data-turbolinks-track" => true %>
+</head>
 <div class="listing">
-    <div class="listing-preview">
+   <div class="listing-preview">
     
         <% if listing.images.attached? %>
-
-            <%= carousel_for(listing.images, listing.id) %>
+            <%= image_tag(listing.images.first)%>
+            <%# <%= carousel_for(listing.images, listing.id) %> %>
             <%# <%= carousel_for(["https://i.insider.com/56d8164cdd0895230f8b4697?width=700", "https://i.insider.com/56d8164cdd0895230f8b4697?width=700"], 1)%> %>
         <% else %>
-            <%= carousel_for(["https://i.insider.com/56d8164cdd0895230f8b4697?width=700", "https://i.insider.com/56d8164cdd0895230f8b4697?width=700"], listing.id)%>
-            <%# <img src="https://images.unsplash.com/photo-1543393470-b2c833b98dce?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8aGVhcnRofGVufDB8fDB8fA%3D%3D&w=1000&q=80", 2> %>
+            <%# <%= carousel_for(["https://i.insider.com/56d8164cdd0895230f8b4697?width=700", "https://i.insider.com/56d8164cdd0895230f8b4697?width=700"], listing.id)%> %>
+            <img src="https://images.unsplash.com/photo-1543393470-b2c833b98dce?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8aGVhcnRofGVufDB8fDB8fA%3D%3D&w=1000&q=80", 2>
         <% end %>
     </div>
     <%= link_to listing_path(listing.id), target: :_blank, style: "text-decoration: none;" do %>
@@ -35,11 +38,12 @@
                 <% end %>
             </h6>
         </div>
-        <div class="favorite-button">
-            <%= form_with url: "/listings/favorite", method: :post, :local => false, :remote => true do |form| %>
-                <%= form.check_box :favorite, { multiple: true, onchange: "this.form.submit()", checked: !@favorites.blank? && @favorites.include?(listing.id) }, true %>
-                <%= form.hidden_field :favorite_val, value: listing.id %>
-            <% end %>
-        </div>
     <% end %>
+    
+    <div class="favorite-button">
+        <%= form_with url: "/listings/favorite", method: :post, :local => false, :remote => true do |form| %>
+            <%= form.check_box :favorite, { multiple: true, onchange: "this.form.submit()", checked: !@favorites.blank? && @favorites.include?(listing.id) }, true %>
+            <%= form.hidden_field :favorite_val, value: listing.id %>
+        <% end %>
+    </div>
 </div>

@@ -1,5 +1,6 @@
-import 'bootstrap'
+// import 'bootstrap'
 import '../stylesheets/application.scss'
+import 'bootstrap/js/dist/carousel'
 
 require.context("../images", true);
 require("@rails/ujs").start()

@@ -1,67 +1,18 @@
-<%# <h1>Listings#show</h1>
-<p>Find me in app/views/listings/show.html.erb</p> %>
-
+<head>
+    <%= stylesheet_link_tag "listings/show", media: "all", "data-turbolinks-track" => true %>
+</head>
 <div class="listing-full">
     <div class="listing-title">
         <h2><%= @listing.title %></h2>
-
+    </div>
         <% if @listing.images.present? %>
-            <% @listing.images.each do |image| %>
-                <%= image_tag(image) %>
-            <% end %>
+            <%= carousel_for(@listing.images, @listing.id) %>
         <% else %>
-            <img src="https://images.unsplash.com/photo-1543393470-b2c833b98dce?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8aGVhcnRofGVufDB8fDB8fA%3D%3D&w=1000&q=80">
+        
+            <%= carousel_for(["https://images.unsplash.com/photo-1543393470-b2c833b98dce?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8aGVhcnRofGVufDB8fDB8fA%3D%3D&w=1000&q=80"], @listing.id) %>
         <% end %>
-
-        <h3 style="margin-bottom: 0;"><%= @listing.apt_complex %></h3>
-        <div>
-            <li><%= @listing.private_bedroom ? "Private Bedroom" : "Shared Bedroom" %></li> &sdot;
-            <li><%= @listing.private_bathroom ? "Private Bathroom" : "Shared Bathroom" %></li> &sdot;
-            <li><%= @listing.num_bedrooms %> BD x <%= @listing.num_bathrooms %> BA </li>
-            <br/>
-            Rent: <%= @listing.rent %>
-        </div>
-        <hr/>
-        <div class="container">
-            <div>
-                Lease Start: 
-            </div>
-            <div>
-                <%= @listing.lease_start %>
-            </div>
-        </div>
-    </div>
-    <div class="image-gallery">
-        <!--<% if @listing.image.attached? %>
-            <div class="imageGallery">
-                <%= image_tag(@listing.image)%>
-            </div>
-        <% else %>
-            <img src="https://images.unsplash.com/photo-1543393470-b2c833b98dce?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8aGVhcnRofGVufDB8fDB8fA%3D%3D&w=1000&q=80">
-        <% end %>-->
-        <div class="half" style="margin: 2px">
-            <img src="https://i.stack.imgur.com/kZfq5.jpg">
-        </div>
-        <div class="half" style="flex-direction: column">
-            <div class="half">
-                <div class="half" style="margin: 2px">
-                    <img src="https://disneyanimation.com/img/uploads/publications/the-challenges-of-releasing-the-moana-island-scene/the-challenges-of-releasing-the-moana-island-scene.jpg">
-                </div>
-                <div class="half" style="margin: 2px">
-                    <img src="https://variety.com/wp-content/uploads/2014/10/moana-disney.jpg">
-                </div>
-            </div>
-            <div class="half">
-                <div class="half" style="margin: 2px">
-                    <img src="https://www.lego.com/cdn/cs/catalog/assets/blt42a78f6bd1251fd6/1/LEGO_41149_WEB_PRI_1488.jpg">
-                </div>
-                <div class="half" style="margin: 2px">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRnLY7D_aoa0oIzAHlv_08-cydHKNu0YxNAoQ&usqp=CAU">
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="listing-summary">
+        
+ <div class="listing-summary">
         <h3><%= @listing.apt_complex unless @listing.apt_complex.blank? %></h3>
         <div>
             <li><%= @listing.private_bedroom ? "Private Bedroom " : "Shared Bedroom "%>• </li>
@@ -85,16 +36,17 @@
             <div class="people-pets">
                 <% if !@listing.num_roommates.blank? or !@listing.num_pets.blank? %>
                     <hr/>
-                    <h4>Number of Roomates <h5><%= @listing.num_roommates %></h5></h4>
-                    <h4>Number of Pets <h5><%= @listing.num_pets ? @listing.num_pets : "0" %></h5></h4>
+                    <h4>Who you'll be living with</h4>
+                    <h5>Number of Roomates </h5><p><%= @listing.num_roommates %></p>
+                    <h5>Number of Pets </h5><p><%= @listing.num_pets ? @listing.num_pets : "0" %></p>
                 <% end %>
             </div>
             <div class="amenities">
-                <hr/>
                 <% if !@amenities.blank? %>
+                    <hr/>
                     <h4>Amenities</h4>
                     <% for amenity in @amenities %>
-                        <h5><%= amenity %></h5>
+                        <p><%= amenity %></p>
                     <% end %>
                 <% end %>
             </div>
@@ -102,7 +54,7 @@
                 <% if !@listing.description.blank? %>
                     <hr/>
                     <h4>Owner's Note</h4>
-                    <h5><%= @listing.description %></h5>
+                    <p><%= @listing.description %></p>
                 <% end %>
             </div>
         </div>

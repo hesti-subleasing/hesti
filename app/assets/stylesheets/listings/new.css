@@ -89,6 +89,8 @@ p, span, label {
 
 .section-heading {
     font-size: 27px;
+    margin-bottom: 27px;
+    margin-top: 27px;
 }
 
 .divider {

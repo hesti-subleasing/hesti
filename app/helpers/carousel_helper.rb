@@ -15,6 +15,7 @@ module CarouselHelper
         class: 'carousel slide',
         data: { 
           ride: 'carousel', 
+          interval: 'false'
         }
       }
       content = safe_join([indicators, slides, controls])
@@ -53,7 +54,8 @@ module CarouselHelper
         class: (is_active ? 'carousel-item active' : 'carousel-item'),
       }
 
-      content_tag(:div, image_tag(image, class: "d-block w-100"), options)
+      inner_div = content_tag(:div, image_tag(image, class: "d-block w-100"), class: "img-wrapper")
+      content_tag(:div, inner_div, options)
     end
 
     def controls
@@ -76,7 +78,7 @@ module CarouselHelper
         }
       }
     
-      icon = content_tag(:span, '', icon_options) + content_tag(:span, direction, class: "sr-only")
+      icon = content_tag(:span, '', icon_options)
       control = content_tag(:a, icon, a_options)
     end
   end

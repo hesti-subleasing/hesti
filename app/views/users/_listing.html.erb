@@ -1,8 +1,11 @@
+<head>
+    <%= stylesheet_link_tag "listings/_listing", media: "all", "data-turbolinks-track" => true %>
+</head>
 <%= link_to listing_path(listing.id), target: :_blank, style: "text-decoration: none;" do %>
     <div class="listing">
         <div class="listing-preview">
-            <% if listing.image.attached? %>
-                <%= image_tag(listing.image)%>
+            <% if listing.images.attached? %>
+                <%= image_tag(listing.images.first)%>
             <% else %>
                 <img src="https://images.unsplash.com/photo-1543393470-b2c833b98dce?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8aGVhcnRofGVufDB8fDB8fA%3D%3D&w=1000&q=80">
             <% end %>
