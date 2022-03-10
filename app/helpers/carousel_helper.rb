@@ -1,17 +1,24 @@
 module CarouselHelper
-  def carousel_for(images)
-    Carousel.new(self, images).html
+  def carousel_for(images, id)
+    Carousel.new(self, images, id).html
   end
 
   class Carousel
-    def initialize(view, images)
+    def initialize(view, images, id)
       @view, @images = view, images
-      @uid = SecureRandom.hex(6)
+      @uid = "l-"+id.to_s
     end
 
     def html
+      options = {
+        id: uid,
+        class: 'carousel slide',
+        data: { 
+          ride: 'carousel', 
+        }
+      }
       content = safe_join([indicators, slides, controls])
-      content_tag(:div, content, id: uid, class: 'carousel slide')
+      content_tag(:div, content, options)
     end
 
     private
@@ -28,7 +35,7 @@ module CarouselHelper
       options = {
         class: (index.zero? ? 'active' : ''),
         data: { 
-          target: uid, 
+          target: "#"+uid, 
           slide_to: index
         }
       }
@@ -43,24 +50,34 @@ module CarouselHelper
 
     def slide_tag(image, is_active)
       options = {
-        class: (is_active ? 'item active' : 'item'),
+        class: (is_active ? 'carousel-item active' : 'carousel-item'),
       }
 
-      content_tag(:div, image_tag(image), options)
+      content_tag(:div, image_tag(image, class: "d-block w-100"), options)
     end
 
     def controls
-      safe_join([control_tag('left'), control_tag('right')])
+      safe_join([control_tag('prev'), control_tag('next')])
     end
 
     def control_tag(direction)
-      options = {
-        class: "#{direction} carousel-control",
-        data: { slide: direction == 'left' ? 'prev' : 'next' }
+      a_options = {
+        class: "carousel-control-#{direction}",
+        href: "#"+uid,
+        role: "button",
+        data: { slide: direction
+              }
       }
 
-      icon = content_tag(:i, '', class: "glyphicon glyphicon-chevron-#{direction}")
-      control = link_to(icon, "##{uid}", options)
+      icon_options = {
+        class: "carousel-control-#{direction}-icon",
+        aria: {
+          hidden: "true"
+        }
+      }
+    
+      icon = content_tag(:span, '', icon_options) + content_tag(:span, direction, class: "sr-only")
+      control = content_tag(:a, icon, a_options)
     end
   end
 end

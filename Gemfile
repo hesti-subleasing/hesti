@@ -46,7 +46,11 @@ gem "bootsnap", require: false
 gem "google_sign_in"
 
 #front-end
-gem 'bootstrap', '~> 5.1.3'
+# gem 'bootstrap', '~> 5.1.3'
+# Use SCSS for stylesheets
+gem 'sass-rails'
+
+gem 'webpacker'
 
 # Use Sass to process CSS
 # gem "sassc-rails"
