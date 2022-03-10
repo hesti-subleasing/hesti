@@ -14,10 +14,10 @@
  *= require_self
  */
 
-@import "node_modules/bootstrap/scss/functions";
-@import "node_modules/bootstrap/scss/_variables";
-@import "node_modules/bootstrap/scss/_mixins";
-@import "node_modules/bootstrap/scss/_carousel.scss";
+@import "../../../node_modules/bootstrap/scss/_functions";
+@import "../../../node_modules/bootstrap/scss/_variables";
+@import "../../../node_modules/bootstrap/scss/_mixins";
+@import "../../../node_modules/bootstrap/scss/_carousel.scss";
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap");
 
 .carousel-control-next-icon {
