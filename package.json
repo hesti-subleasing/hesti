@@ -1,4 +1,8 @@
 {
+  "name": "hesti",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "UNLICENSED",
   "dependencies": {
     "@rails/activestorage": "^7.0.2-3",
     "@rails/ujs": "^7.0.2-3",
