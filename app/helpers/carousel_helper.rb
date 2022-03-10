@@ -54,7 +54,7 @@ module CarouselHelper
         class: (is_active ? 'carousel-item active' : 'carousel-item'),
       }
 
-      inner_div = content_tag(:div, image_tag(image, class: "d-block w-100"), class: "img-wrapper")
+      inner_div = content_tag(:div, image_tag(image, class: "d-block"), class: "img-wrapper")
       content_tag(:div, inner_div, options)
     end
 
