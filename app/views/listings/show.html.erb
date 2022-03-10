@@ -63,12 +63,12 @@
                 <% if @listing.user_id == session[:user_id] %>
                     <%= button_to "Edit Listing", edit_listing_path(@listing.id), method: :get, class: "button" %>
                 <% elsif @requested %>
-                    <%= form_with url: "/listings/cancel_request", method: :post, :local => false, :remote => true do |form| %>
+                    <%= form_with url: "/listings/cancel_request", method: :post do |form| %>
                         <%= form.hidden_field :requested_listing, value: @listing.id %>
                         <%= form.button "Cancel Request", class: "button" %> 
                     <% end %>
                 <% else %>
-                    <%= form_with url: "/listings/request_listing", method: :post, :local => false, :remote => true do |form| %>
+                    <%= form_with url: "/listings/request_listing", method: :post do |form| %>
                         <%= form.hidden_field :requested_listing, value: @listing.id %>
                         <%= form.button "Request", class: "button" %> 
                     <% end %>
