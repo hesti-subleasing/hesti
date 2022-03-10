@@ -1,0 +1,129 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS (and SCSS, if configured) file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+ @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap");
+
+ body{
+     background-color: #ded2cc;
+     margin: 0;
+     /* font-family: 'Montserrat', Times, serif; */
+ }
+ 
+h1 {
+    color: #c28e71;
+    text-align: center;
+    font-size: 70px;
+    width:100%;
+    z-index:100;
+    /* margin-top: 100px; */
+}
+
+ 
+.navBar {
+  height: calc(3em + 15px);
+  width:100%;
+  background-color: var(--nav-color);
+  /* position: absolute; */
+  top:0;
+}
+
+.logo-image{
+  display: block;
+  max-width:50px;
+  border-radius: 50%;
+  overflow: hidden;
+  height: 100%;
+  padding: 0;
+  padding-left: 10px;
+}
+
+.logo-image img {
+  height: 100%;
+}
+  
+.navMenu {
+  position: absolute;
+  top: calc(2em);
+  right: -15px;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-10%, -50%);
+  padding:5px;
+}
+  
+.navMenu a {
+  color: black;
+  text-decoration: none;
+  font-size: 1.2em;
+  text-transform: uppercase;
+  font-weight: 500;
+  display: inline-block;
+  /* width: 100px; */
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  background: none;
+  border: none;
+  /* font-family: "Montserrat", sans-serif; */
+  padding-left: 10px;
+  padding-right: 10px;
+}
+  
+.navMenu a:hover {
+  color: #c28e71;
+}
+  
+.navMenu .dot {
+  width: 6px;
+  height: 6px;
+  background: #c28e71;
+  border-radius: 50%;
+  opacity: 0;
+  -webkit-transform: translateX(30px);
+  transform: translateX(30px);
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+}
+  
+.navMenu a:nth-child(1):hover ~ .dot {
+  -webkit-transform: translateX(35px);
+  transform: translateX(35px);
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  opacity: 1;
+}
+
+.navMenu a:nth-child(2):hover ~ .dot {
+  -webkit-transform: translateX(130px);
+  transform: translateX(130px);
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  opacity: 1;
+}
+
+.navMenu a:nth-child(3):hover ~ .dot {
+  -webkit-transform: translateX(233px);
+  transform: translateX(233px);
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  opacity: 1;
+}
+
+.navMenu a:nth-child(4):hover ~ .dot {
+  -webkit-transform: translateX(337px);
+  transform: translateX(337px);
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  opacity: 1;
+}
+  

@@ -1,0 +1,29 @@
+h1, h3, div{
+    color: #c28e71;
+}
+
+li {
+    display: inline;
+    list-style: none
+}
+
+.container {
+    display: flex;
+    /* justify-content: flex-start; */
+    gap: 10px;
+}
+
+.tab {
+    text-indent: 30px;
+}
+
+.listing img {
+    width: 100%;
+    /* height: 100%; */
+}
+
+.imageGallery {
+    background-color: black;
+    display: flex;
+    align-items: center;
+}

@@ -20,6 +20,9 @@ module NavigationHelpers
       when /the listings page/
         '/listings'
 
+      when /the new listing page/
+        '/listings/new'
+
       when /^the listing details page for id (.*)$/
         '/listings/' + $1
   

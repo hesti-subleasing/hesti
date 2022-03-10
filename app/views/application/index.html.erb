@@ -3,8 +3,8 @@
     <%= yield :meta %>
     <meta name="robots" content="index,follow">
     <title><%= yield :title %></title>
-    <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true, :cache => "cache/all" %>
-    <%= javascript_include_tag "application", :async => true, "data-turbolinks-track" => true, :cache => "cache/all" %>
+    <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
+
     <%= csrf_meta_tags %>
 </head>
 

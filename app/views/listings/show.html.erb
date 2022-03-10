@@ -4,6 +4,32 @@
 <div class="listing-full">
     <div class="listing-title">
         <h2><%= @listing.title %></h2>
+
+        <% if @listing.images.present? %>
+            <% @listing.images.each do |image| %>
+                <%= image_tag(image) %>
+            <% end %>
+        <% else %>
+            <img src="https://images.unsplash.com/photo-1543393470-b2c833b98dce?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8aGVhcnRofGVufDB8fDB8fA%3D%3D&w=1000&q=80">
+        <% end %>
+
+        <h3 style="margin-bottom: 0;"><%= @listing.apt_complex %></h3>
+        <div>
+            <li><%= @listing.private_bedroom ? "Private Bedroom" : "Shared Bedroom" %></li> &sdot;
+            <li><%= @listing.private_bathroom ? "Private Bathroom" : "Shared Bathroom" %></li> &sdot;
+            <li><%= @listing.num_bedrooms %> BD x <%= @listing.num_bathrooms %> BA </li>
+            <br/>
+            Rent: <%= @listing.rent %>
+        </div>
+        <hr/>
+        <div class="container">
+            <div>
+                Lease Start: 
+            </div>
+            <div>
+                <%= @listing.lease_start %>
+            </div>
+        </div>
     </div>
     <div class="image-gallery">
         <!--<% if @listing.image.attached? %>
