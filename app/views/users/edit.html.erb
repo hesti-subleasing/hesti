@@ -14,7 +14,7 @@
     <h1>Edit Account Info</h1>
 
     <div class = "signup-form">
-        <%= form_with model: @user, url: update_user_path, local: true, method: :put do |user_form| %>
+        <%= form_with model: @user, url: update_user_path, local: true, html: {id: "edit_form"}, method: :put do |user_form| %>
             <%= render partial: "form", locals: {form: user_form, errors: @user.errors} %>
             <%= user_form.submit "Submit", class: "btn" %>
         <% end %>

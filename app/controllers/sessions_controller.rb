@@ -12,7 +12,7 @@ class SessionsController < ApplicationController
 
       redirect_to listings_path
     else
-      flash[:error] = "Incorrect email or password."
+      flash[:warning] = "Incorrect email or password."
       render :login, status: :unprocessable_entity
     end 
   end
@@ -36,7 +36,6 @@ class SessionsController < ApplicationController
   private
     def authenticate_with_google
       if id_token = flash[:google_sign_in][:id_token]
-        p "worked"
         # google auth worked
         google = GoogleSignIn::Identity.new(id_token)
 
@@ -49,7 +48,6 @@ class SessionsController < ApplicationController
           return new_google_user(google)
         end
 
-        # nil
       elsif error = flash[:google_sign_in][:error]
         # google auth failed
         logger.error "Google authentication error: #{error}"
@@ -74,7 +72,7 @@ class SessionsController < ApplicationController
         return user
       end
 
-      p "Error: could not make new user"
+      # p "Error: could not make new user"
       return nil
     end
 

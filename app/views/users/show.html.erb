@@ -23,8 +23,10 @@
 <h2>My Listings</h2>
 <%= render partial: "listing", collection: @listings, locals: {favorited_by: @favorited_by, favorite_option: false, request_option: false } %>
 
+<div id="favorites">
 <h2>My Favorites</h2>
-<%= render partial: "listing", collection: @favorites, locals: {favorited_by: [], favorite_option: true, request_option: false } %>
+    <%= render partial: "listing", collection: @favorites, locals: {favorited_by: [], favorite_option: true, request_option: false } %>
+</div>
 
 <h2>My Requests</h2>
 <%= render partial: "listing", collection: @requests, locals: {favorited_by: [], favorite_option: false, request_option: true } %>

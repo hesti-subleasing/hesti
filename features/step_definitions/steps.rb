@@ -5,8 +5,6 @@ require 'capybara/cucumber'
 require 'capybara/session'
 require File.expand_path(File.join(File.dirname(__FILE__), "..", "support", "paths"))
 
-# require SessionsConcern
-
 module WithinHelpers
   def with_scope(locator)
     locator ? within(locator) { yield } : yield
@@ -22,7 +20,7 @@ end
 
 Given /the following listings exist/ do |listings_table|
   listings_table.hashes.each do |listing|
-    listing[:user_id] = User.first.id
+    listing[:user_id] ||= User.first.id
     Listing.new(listing) do |l|
       if listing[:id]
         puts("changing listing id")
@@ -33,17 +31,25 @@ Given /the following listings exist/ do |listings_table|
   end
 end
 
+Given /the following organizations exist/ do |accounts_table|
+  accounts_table.hashes.each do |account|
+    Organization.create account
+  end
+end
+
 Given /^I am on (.+)$/ do |page_name|
   visit path_to(page_name)
 end
 
 Given /^I am logged in as (.+)$/ do |username|
-  user = User.where(username: user).first
-  if user
-    set_session_params(user)
-  else
-    p "errorr"
-  end
+  expect(User.where(username: username)).to exist
+  
+  user = User.where(username: username).first
+
+  visit "/login"
+  fill_in("email", :with => user.email)
+  fill_in("password", :with => user.password)
+  click_button("Login")
 end
 
 Then /^I should be on (.+)$/ do |page_name|
@@ -51,7 +57,6 @@ Then /^I should be on (.+)$/ do |page_name|
       current_path.should == path_to(page_name)
     else
       expect(page).to have_current_path(path_to(page_name))
-      # assert_equal path_to(page_name), current_path
     end
 end
 
@@ -108,9 +113,7 @@ When /^I fill out the listing form(?: with(?: title="([^,]*)",?)?(?: address_1="
   apt ||= "TestApt"
   rent ||= 1000
   private_bed ||= "true"
-  private_bed = private_bed.downcase == "true" ? true : false
   private_bath ||= "false"
-  private_bath = private_bath.downcase == "true" ? true : false
   roommates ||= 4
   beds ||= 4
   baths ||= 4
@@ -125,13 +128,33 @@ When /^I fill out the listing form(?: with(?: title="([^,]*)",?)?(?: address_1="
   fill_in("listing_zip_code", :with => zip_code)
   fill_in("listing_apt_complex", :with => apt)
   fill_in("listing_rent", :with => rent)
-  fill_in("listing_private_bedroom", :with => private_bed)
-  fill_in("listing_private_bathroom", :with => private_bath)
+  if private_bed == "true" then
+    choose("listing_private_bedroom_true")
+  else
+    choose("listing_private_bedroom_false")
+  end
+  
+  if private_bath == "true" then
+    choose("listing_private_bathroom_true")
+  else
+    choose("listing_private_bathroom_false")
+  end
+  # fill_in("listing_private_bedroom", :with => private_bed)
+  # fill_in("listing_private_bathroom", :with => private_bath)
   fill_in("listing_num_roommates", :with => roommates)
-  fill_in("listing_num_beds", :with => beds)
-  fill_in("listing_num_baths", :with => baths)
+  fill_in("listing_num_bedrooms", :with => beds)
+  fill_in("listing_num_bathrooms", :with => baths)
   fill_in("listing_num_pets", :with => pets)
   fill_in("listing_description", :with => description)
+end
+
+When /^I fill in "(.+)" with "(.+)"$/ do |selector, value|
+  find("#"+selector).set(value)
+end
+
+Then /^I submit the "([^\"]*)" form$/ do |form_id|
+  element = find_by_id(form_id)
+  Capybara::RackTest::Form.new(page.driver, element.native).submit :name => nil
 end
 
 And /^I click "([^\"]+)"$/ do |button|
@@ -139,11 +162,20 @@ And /^I click "([^\"]+)"$/ do |button|
 end
 
 Then /^I should see "([^\"]+)"$/ do |text|
-  page.should have_content(text)
+  page.body.should match(%r{#{text}}i)
+end
+
+Then /^I should not see "([^\"]+)"$/ do |text|
+  page.body.should_not match(%r{#{text}}i)
 end
 
 When /^I create an account with username "user"$/ do
   step "I fill out the form with username=user"
   step "I click \"Sign Up\""
 end
+
+# Then /^"(.+)" should be in my favorites$/ do |content|
+#   visit "/profile"
+#   find(:css, '#favorites').should have_content(content)
+# end
 

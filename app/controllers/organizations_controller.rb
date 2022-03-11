@@ -10,6 +10,7 @@ class OrganizationsController < ApplicationController
 
       @org = Organization.find(@user.organization_id)
     else
+      flash[:warning] = "You must log in to view organization."
       redirect_to login_path
     end
   end
@@ -23,6 +24,7 @@ class OrganizationsController < ApplicationController
       end
       @org = Organization.find(params[:id])
     else
+      flash[:warning] = "You must log in to edit organization."
       redirect_to login_path
     end
     
@@ -47,6 +49,7 @@ class OrganizationsController < ApplicationController
       @members = User.where(organization_id: @user.organization_id).order("id").pluck("id", "first_name", "last_name", "username", "email")
       @org = Organization.find(@user.organization_id)
     else
+      flash[:warning] = "You must log in to view users."
       redirect_to login_path
     end
   end
