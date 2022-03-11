@@ -89,6 +89,10 @@ ActiveRecord::Schema.define(version: 2022_03_06_195437) do
     t.date "lease_end"
     t.float "rent"
     t.string "title"
+    t.string "image_file_name"
+    t.integer "image_file_size"
+    t.string "image_content_type"
+    t.datetime "image_updated_at"
     t.index ["user_id"], name: "index_listings_on_user_id"
   end
 
