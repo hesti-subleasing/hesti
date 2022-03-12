@@ -14,7 +14,7 @@
     </div>
     <div class="profile-options">
         <%= button_to "Edit Account", edit_user_path, method: :get, class: "button" %>
-        <%= button_to "Deactivate my Account", deactivate_path, method: :delete, class: "button" %>
+        <%= button_to "Deactivate my Account", deactivate_path, method: :delete, data: { confirm: "Are you sure?" }, class: "button" %>
         <%= button_to "Create Listing", new_listing_path, method: :get, class: "button" %>
     </div>
 </div>

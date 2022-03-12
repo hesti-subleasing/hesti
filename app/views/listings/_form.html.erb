@@ -86,21 +86,9 @@
         <br>
     <% end %>
     <br>
-    <div class="add-pic">
-        <div class="field">
-            <%= listing_form.label :image_title %>
-            <%= listing_form.text_field :image_title %>
-        </div>
-
-        <div class="field">
-            <%= listing_form.label :image_caption %>
-            <%= listing_form.text_area :image_caption %>
-        </div>
-
-        <div class="field">
-            <%= listing_form.label :image %>
-            <%= listing_form.file_field :images, multiple: true %>
-        </div>
+    <h3 class="section-heading">Upload Images</h3>
+    <div class="col" style="padding-left:60px">
+        <%= listing_form.file_field :images, multiple: true %>
     </div>
     <br>
     <%= listing_form.submit button_label, class: "button" %> 

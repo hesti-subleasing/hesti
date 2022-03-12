@@ -58,7 +58,7 @@
                 <% end %>
             </div>
         </div>
-        <div class="listing-buttons">
+        <div>
             <% if session[:user_id] %>
                 <% if @listing.user_id == session[:user_id] %>
                     <%= button_to "Edit Listing", edit_listing_path(@listing.id), method: :get, class: "button" %>
