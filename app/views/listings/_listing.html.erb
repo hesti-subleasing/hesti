@@ -41,7 +41,7 @@
     <% end %>
     
     <div class="favorite-button">
-        <%= form_with url: "/listings/favorite", method: :post, :local => false, :remote => true do |form| %>
+        <%= form_with url: "/listings/favorite", method: :post do |form| %>
             <%= form.check_box :favorite, { multiple: true, onchange: "this.form.submit()", checked: !@favorites.blank? && @favorites.include?(listing.id) }, true %>
             <%= form.hidden_field :favorite_val, value: listing.id %>
         <% end %>

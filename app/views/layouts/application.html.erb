@@ -24,7 +24,7 @@
       </div>
       <nav class="navMenu">
         <%= link_to "Home", root_path %>
-        <%= link_to "Listings", listings_path %>
+        <%= link_to "Listings", listings_path, data: { turbolinks: false }%>
         <% if session[:user_id] %>
           <% if session[:admin] %>
             <%= link_to "Organization", organization_path %>
