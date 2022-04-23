@@ -1,7 +1,9 @@
 <head>
     <%= stylesheet_link_tag "listings/_listing", media: "all", "data-turbolinks-track" => true %>
 </head>
-<div class="listing">
+
+<%= link_to listing_path(listing.id), target: :_blank, style: "text-decoration: none;" do %>
+<div class="listing" id="listing-<%= listing.id %>">
    <div class="listing-preview">
     
         <% if listing.images.attached? %>
@@ -13,7 +15,6 @@
             <img src="https://images.unsplash.com/photo-1543393470-b2c833b98dce?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8aGVhcnRofGVufDB8fDB8fA%3D%3D&w=1000&q=80", 2>
         <% end %>
     </div>
-    <%= link_to listing_path(listing.id), target: :_blank, style: "text-decoration: none;" do %>
         <div class="listing-info">
             <h3><%= listing.title %></h3>
             <h6>
@@ -38,7 +39,6 @@
                 <% end %>
             </h6>
         </div>
-    <% end %>
     
     <div class="favorite-button">
         <%= form_with url: "/listings/favorite", method: :post do |form| %>
@@ -47,3 +47,5 @@
         <% end %>
     </div>
 </div>
+
+    <% end %>

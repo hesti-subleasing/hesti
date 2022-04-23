@@ -1,7 +1,8 @@
 module SessionsConcern
     extend ActiveSupport::Concern
-  
+    
     included do
+      include ActionController::Helpers
       helper_method :set_session_params
       helper_method :clear_session_params
     end

@@ -2,7 +2,7 @@
     <%= stylesheet_link_tag "listings/_listing", media: "all", "data-turbolinks-track" => true %>
 </head>
 <%= link_to listing_path(listing.id), target: :_blank, style: "text-decoration: none;" do %>
-    <div class="listing">
+    <div class="listing" id="listing-<%= listing.id %>">
         <div class="listing-preview">
             <% if listing.images.attached? %>
                 <%= image_tag(listing.images.first)%>
@@ -13,7 +13,7 @@
         <div style="listing-info">
             <h3><%= listing.title %></h3>
             <h6>
-                <% if !listing.apt_complex.empty? %>
+                <% if listing.apt_complex.present? and !listing.apt_complex.empty? %>
                     <%= listing.apt_complex %>
                 <% end %>
             </h6>

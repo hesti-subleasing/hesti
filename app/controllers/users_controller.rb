@@ -56,6 +56,7 @@ class UsersController < ApplicationController
       @request_map = request_arr.to_h { |req| [req[0], req[1]] }
       # p potato
     else
+      flash[:warning] = "You must log in to view your profile."
       redirect_to login_path
     end
   end
