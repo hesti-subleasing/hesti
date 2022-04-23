@@ -2,3 +2,4 @@
 //= link_tree ../stylesheets .css
 //= link_tree ../../assets .js
 //= link_tree ../../../vendor/javascript .js
+//= link sessions/login.css
