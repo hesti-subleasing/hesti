@@ -20,3 +20,12 @@ Scenario: I view the listings page
 	Given I am on the listings page
 	Then I should see "listing1"
 	And I should see "listing2"
+
+
+Scenario: I filter the listings page by rent
+	Given I am logged in as user
+    And I am on the listings page
+	Then I fill in "min_rent" with "750"
+    And I submit the "filters" form
+	Then I should see "listing1"
+	And I should not see "listing2"

@@ -14,7 +14,7 @@ Scenario: I create a new account
 	Given I am on the signup page
 	When I fill out the signup form with first="b", last="g", username="blue", email="blue@gmail.com", password="blue"
     And I click "Sign Up"
-	Then I should be on the listings page
+    Then I should see "Listings"
 
 Scenario: I attempt to create an account with a duplicate username
     Given I am on the signup page

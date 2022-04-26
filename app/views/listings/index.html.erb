@@ -3,7 +3,7 @@
 </head>
 <h1 style="margin-bottom: 10px">Listings</h1>
 <%# <p>Find me in app/views/listings/index.html.erb</p> %>
-<%= form_with url: listings_path, method: :get do |form| %>
+<%= form_with url: listings_path, html: {id: "filters"}, method: :get do |form| %>
     <%= form.label :query %>
     <%= form.text_field :query, onchange: "this.form.submit()", value: @search %>
     <br>

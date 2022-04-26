@@ -29,15 +29,18 @@ class ListingsController < ApplicationController
       @listing = Listing.new
       @amenities = Amenity.all
     else
-      redirect_to root_path
+      flash[:warning] = "You must log in to create a listing."
+      redirect_to login_path
     end
   end
 
   def create
     @listing = Listing.new(listing_params)
-    params[:listing][:images].each do |image| 
-      @listing.images.attach(image)
-    end 
+    if params[:listing][:images].present?
+      params[:listing][:images].each do |image| 
+        @listing.images.attach(image)
+      end
+    end
     
     if @listing.save 
       if amenity_params.has_key?("amenitymapping")
@@ -51,10 +54,6 @@ class ListingsController < ApplicationController
       @amenities = Amenity.all
       render :new, status: :unprocessable_entity
     end
-  end
-
-  def test
-    puts "wowwww"
   end
 
   def show
@@ -170,15 +169,15 @@ class ListingsController < ApplicationController
       if params[:favorite].length() == 2 and session[:user_id]
         @favorite = Favorite.new({user_id: session[:user_id], listing_id: params[:favorite_val]})
         if @favorite.save
-          puts "savved"
         end
       elsif params[:favorite].length() == 2
+        flash[:warning] = "You must log in to favorite a listing."
         redirect_to login_path
       elsif params[:favorite].length() == 1
         Favorite.destroy_by(user_id: session[:user_id], listing_id: params[:favorite_val])
       end
     elsif params[:favorite].is_a?(String)
-      if params[:favorite] == "Remove Favorite"
+      if params[:favorite].downcase == "remove favorite"
         Favorite.destroy_by(user_id: session[:user_id], listing_id: params[:favorite_val])
         redirect_to profile_path
       end
@@ -186,7 +185,6 @@ class ListingsController < ApplicationController
   end
 
   def request_listing
-    puts "here"
     @requested_listing = Request.new({user_id: session[:user_id], listing_id: params[:requested_listing]})
     if @requested_listing.save
       puts "savved"
@@ -195,7 +193,6 @@ class ListingsController < ApplicationController
   end
   
   def cancel_request
-    # puts "hereeee"
     Request.destroy_by(user_id: session[:user_id], listing_id: params[:requested_listing])
     redirect_back(fallback_location: root_path)
     # redirect_to listing_path(params[:requested_listing])
