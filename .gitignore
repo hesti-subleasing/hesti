@@ -43,3 +43,4 @@ setup-google.sh
 yarn-debug.log*
 .yarn-integrity
 /coverage
+cc-test-reporter
