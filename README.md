@@ -14,8 +14,8 @@ rbenv local 3.0.4
 <br>
 
 ## Environment Variables
-This application needs to have certain environment variables set up. All environment variables are located in the setup.sh.gpg file.  
-Decrpyt the setup.sh.gpg file. Run:
+This application needs to have certain environment variables set up. All environment variables are located in the `setup.sh.gpg` file.  
+Decrpyt the `setup.sh.gpg` file. Run:
 `gpg -d setup.sh.gpg`  
 It will prompt you for the passphrase. Enter the passphrase if you have it. Once you do, it will create the file `setup.sh` which has the list of environment variables.  
 To export the environment variables, run: `. ./setup.sh`  
