@@ -26,7 +26,7 @@ rails server            // runs application locally
 ```
 
 ## GitHub Actions
-Whenever you push or do a pull request, GitHub Actions will automatically run the cucumber and rspec tests. Details on the steps can be found in `.github/workflows/main.yml` file. The YAML file utilizes GitHub Secrets which have already been set in the repo. They are essentially the environment variables for this application.
+Whenever you push or do a pull request, GitHub Actions will automatically run the cucumber and rspec tests. Details on the steps can be found in the `.github/workflows/main.yml` file. The YAML file utilizes GitHub Secrets which have already been set in the repo. They are essentially the environment variables for this application.
 To run these tests locally, run the following commands:
 ```
 bundle exec cucumber        // runs the cucumber tests
@@ -34,4 +34,4 @@ bundle exec rspec           // runs the rspec tests
 ```
 
 ## Heroku
-This application is deployed on Heroku. Whenever you push to main, it will automatically trigger heroku to deploy the current project.
+This application is deployed on Heroku. Whenever you push to main, it will automatically trigger Heroku to deploy the current project.
