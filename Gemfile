@@ -89,4 +89,5 @@ group :test do
   gem 'database_cleaner'
   gem 'simplecov', require: false
   gem "launchy", "~> 2.1.2"
+  gem "sqlite3"
 end
