@@ -4,9 +4,11 @@ class SessionsController < ApplicationController
   def login
   end
 
+  # login user
   def create
     @user = User.find_by(email: params[:email])
 
+    # checking user credentials
     if @user && @user.password == params[:password]
       set_session_params(@user)
 
@@ -72,7 +74,6 @@ class SessionsController < ApplicationController
         return user
       end
 
-      # p "Error: could not make new user"
       return nil
     end
 

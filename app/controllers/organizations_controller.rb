@@ -1,5 +1,6 @@
 
 class OrganizationsController < ApplicationController
+  # shows organization profile that only admins can access
   def organization
     if session[:user_id]
       id = session[:user_id]
@@ -15,6 +16,7 @@ class OrganizationsController < ApplicationController
     end
   end
   
+  # edit organization settings
   def edit
     if session[:user_id]
       @user = User.find(session[:user_id])
@@ -30,6 +32,7 @@ class OrganizationsController < ApplicationController
     
   end
 
+  # updates organization settings based on edit form
   def update
     @org = Organization.find(params[:id])
     @org.update!(org_params)
@@ -37,6 +40,7 @@ class OrganizationsController < ApplicationController
     redirect_to organization_path
   end
 
+  # shows the admin the people who are part of the org
   def users
     if session[:user_id]
       id = session[:user_id]

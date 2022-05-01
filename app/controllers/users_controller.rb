@@ -33,6 +33,8 @@ class UsersController < ApplicationController
     if session[:user_id]
       id = session[:user_id]
       @user = User.find(id)
+
+      # if user is an admin, redirect to organization profile in organizations controller
       if @user.is_admin
         redirect_to organization_path
       end
@@ -46,15 +48,15 @@ class UsersController < ApplicationController
       listingIDs = Listing.where(user_id: id).pluck("id")
       @favorited_by = Favorite.where(listing_id: listingIDs).group(:listing_id).count    # number of ppl who have liked each listing
 
-
+      # show a user's favorited listings
       favoriteIDs = Favorite.where(user_id: id).pluck("listing_id")
       @favorites = Listing.find(favoriteIDs)
-
+      
+      # show a user's requested listings
       requested_listings = Request.where(user_id: id).pluck("listing_id")
       @requests = Listing.find(requested_listings)
       request_arr = Request.where(user_id: id).joins(:listing).pluck("listing_id", "id")
       @request_map = request_arr.to_h { |req| [req[0], req[1]] }
-      # p potato
     else
       flash[:warning] = "You must log in to view your profile."
       redirect_to login_path
