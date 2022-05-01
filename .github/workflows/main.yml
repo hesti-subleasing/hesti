@@ -1,0 +1,65 @@
+env:
+  POSTGRES_USER: postgres
+  POSTGRES_PASSWORD: password
+  DATABASE_USER: postgres
+  DATABASE_PASSWORD: password
+
+name: build
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    services:
+      db:
+        image: postgres:12
+        ports: ["5432:5432"]
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: password
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install Ruby
+        uses: actions/setup-ruby@v1
+        with:
+          ruby-version: '3.0' 
+
+      - name: Install postgres client
+        run: sudo apt install libpq-dev
+      
+      - uses: borales/actions-yarn@v2.3.0
+        with:
+          cmd: install
+
+      - name: Setup Code Climate test-reporter
+        run: |
+          curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+          chmod +x ./cc-test-reporter
+          ./cc-test-reporter before-build
+      - name: Build and test with RSpec and Cucumber
+        env:
+          RDS_DATABASE: ${{ secrets.RDS_DATABASE }}
+          RDS_USERNAME: ${{ secrets.RDS_USERNAME }}
+          RDS_PASSWORD: ${{ secrets.RDS_PASSWORD }}
+          RDS_HOST: ${{ secrets.RDS_HOST }}
+          CLIENT_ID: ${{ secrets.CLIENT_ID }}
+          CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          S3_BUCKET: ${{ secrets.S3_BUCKET }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
+          AWS_REGION: ${{ secrets.AWS_REGION }}
+          RDS_TEST_DATABASE: ${{ secrets.RDS_TEST_DATABASE }}
+          RDS_TEST_USERNAME: ${{ secrets.RDS_TEST_USERNAME }}
+          RDS_TEST_PASSWORD: ${{ secrets.RDS_TEST_PASSWORD }}
+          RDS_TEST_HOST: ${{ secrets.RDS_TEST_HOST }}
+        run: |
+          gem install bundler
+          bundle install --jobs 4 --retry 3
+          bundle exec rspec
+          bundle exec cucumber
+      - name: Publish code coverage
+        run: |
+          ./cc-test-reporter after-build -t simplecov -r ${{ secrets.CC_TEST_REPORTER_ID }}
