@@ -1,7 +1,7 @@
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby "3.0.4"
+ruby "3.0.4" 
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 6.1.4.4"
@@ -89,4 +89,5 @@ group :test do
   gem 'database_cleaner'
   gem 'simplecov', require: false
   gem "launchy", "~> 2.1.2"
+  # gem "sqlite3"
 end

@@ -286,6 +286,7 @@ GEM
       actionpack (>= 5.2)
       activesupport (>= 5.2)
       sprockets (>= 3.0.0)
+    sqlite3 (1.4.2)
     stimulus-rails (1.0.4)
       railties (>= 6.0.0)
     sys-uname (1.2.2)
@@ -342,6 +343,7 @@ DEPENDENCIES
   selenium-webdriver
   simplecov
   sprockets-rails
+  sqlite3
   stimulus-rails
   turbo-rails
   tzinfo-data
@@ -350,7 +352,7 @@ DEPENDENCIES
   webpacker
 
 RUBY VERSION
-   ruby 3.0.3p157
+   ruby 3.0.4p208
 
 BUNDLED WITH
    2.3.4

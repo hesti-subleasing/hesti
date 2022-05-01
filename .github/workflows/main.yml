@@ -58,8 +58,8 @@ jobs:
         run: |
           gem install bundler
           bundle install --jobs 4 --retry 3
-          bundle exec rspec
           bundle exec cucumber
+          bundle exec rspec
       - name: Publish code coverage
         run: |
           ./cc-test-reporter after-build -t simplecov -r ${{ secrets.CC_TEST_REPORTER_ID }}
